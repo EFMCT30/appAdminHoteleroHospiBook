@@ -1,1 +1,6 @@
-<app-profile></app-profile>
+<ng-container *ngIf="isProfileRoute; else reserva">
+    <app-profile></app-profile>
+</ng-container>
+<ng-template #reserva>
+    <app-reserva></app-reserva>
+</ng-template>
