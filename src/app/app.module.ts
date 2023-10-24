@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ContentComponent } from './content/content.component';
+import { ReservaComponent } from './reserva/reserva.component';
 
 
 
@@ -20,7 +21,8 @@ import { ContentComponent } from './content/content.component';
     ProfileComponent,
     LoginComponent,
     LayoutComponent,
-    ContentComponent
+    ContentComponent,
+    ReservaComponent
   ],
   imports: [
     BrowserModule,
