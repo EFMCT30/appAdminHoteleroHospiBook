@@ -7,6 +7,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { LayoutComponent } from './layout/layout.component';
+import { ContentComponent } from './content/content.component';
 
 
 
@@ -16,7 +18,9 @@ import { LoginComponent } from './login/login.component';
     HeaderComponent,
     SideNavComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
