@@ -6,28 +6,34 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li>
                       <a href="#" class="nav-link text-white justify-content-center">
-                        <i class="fa-solid fa-gauge"></i> 
+                        <i class="fa-solid fa-gauge"></i>
                         <span style="font-size: 20px;"> Dashboard</span>
                       </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-white" style="font-size: 20px;">
-                            <i class="fa-solid fa-person-walking"></i> 
-                            Customers
+                        <a [routerLink]="['/profile']" class="nav-link text-white" style="font-size: 20px;">
+                            <i class="fa-solid fa-person-walking"></i>
+                            Profile
                         </a>
                     </li>
                     <li>
                       <a href="#" class="nav-link text-white" style="font-size: 20px;">
-                        <i class="fa-solid fa-hotel"></i> 
+                        <i class="fa-solid fa-hotel"></i>
                         Hotels
                       </a>
                     </li>
                     <li>
                       <a href="#" class="nav-link text-white" style="font-size: 20px;">
-                        <i class="fa-solid fa-bed"></i> 
+                        <i class="fa-solid fa-bed"></i>
                         Bedrooms
                       </a>
                     </li>
+                  <li>
+                    <a [routerLink]="['/reserva']" class="nav-link text-white" style="font-size: 20px;">
+                      <i class="fa-solid fa-book"></i>
+                      Reserva
+                    </a>
+                  </li>
                 </ul>
             </div>
         </nav>
