@@ -1,2 +1,4 @@
 /* Default styles for large screens and above */
-
+.sidebar{
+  height: 45vh;
+}
