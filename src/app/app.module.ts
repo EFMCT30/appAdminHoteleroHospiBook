@@ -11,6 +11,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { ContentComponent } from './content/content.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HabitacionComponent } from './habitacion/habitacion.component';
+import { HotelComponent } from './hotel/hotel.component';
 
 
 
@@ -24,7 +26,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LayoutComponent,
     ContentComponent,
     ReservaComponent,
-    DashboardComponent
+    DashboardComponent,
+    HabitacionComponent,
+    HotelComponent
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,41 @@
-<ng-container *ngIf="isProfileRoute; else otherRoutes">
+<ng-container *ngIf="isProfileRoute; then profileBlock"></ng-container>
+<ng-template #profileBlock>
   <app-profile></app-profile>
-</ng-container>
-
-<ng-template #otherRoutes>
-  <ng-container *ngIf="isDashboardRoute; then dashboardBlock else reservaBlock"></ng-container>
 </ng-template>
 
+<ng-container *ngIf="isDashboardRoute; then dashboardBlock"></ng-container>
 <ng-template #dashboardBlock>
   <app-dashboard></app-dashboard>
 </ng-template>
 
+<ng-container *ngIf="isReservaRoute; then reservaBlock"></ng-container>
 <ng-template #reservaBlock>
   <app-reserva></app-reserva>
 </ng-template>
 
+<ng-container *ngIf="isHabitacionRoute; then habitacionBlock"></ng-container>
+<ng-template #habitacionBlock>
+  <app-habitacion></app-habitacion>
+</ng-template>
+
+<ng-container *ngIf="isHotelRoute; then hotelBlock"></ng-container>
+<ng-template #hotelBlock>
+  <app-hotel></app-hotel>
+</ng-template>
+
+<!-- <ng-container *ngIf="isProfileRoute; then profileBlock"></ng-container>
+<ng-container *ngIf="isDashboardRoute; then dashboardBlock"></ng-container>
+<ng-container *ngIf="isReservaRoute; then reservaBlock"></ng-container>
+<ng-container *ngIf="isHabitacionRoute; then habitacionBlock"></ng-container>
+<ng-template #profileBlock>
+  <app-profile></app-profile>
+</ng-template>
+<ng-template #dashboardBlock>
+  <app-dashboard></app-dashboard>
+</ng-template>
+<ng-template #reservaBlock>
+  <app-reserva></app-reserva>
+</ng-template>
+<ng-template #habitacionBlock>
+  <app-habitacion></app-habitacion>
+</ng-template>-->
