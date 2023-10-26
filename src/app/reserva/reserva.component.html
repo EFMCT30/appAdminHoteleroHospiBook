@@ -1,105 +1,132 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-      <th>Reserva ID</th>
-      <th>Fecha Inicio</th>
-      <th>Fecha Fin</th>
-      <th>Estado</th>
-      <th>Precio Total</th>
-      <th>Fecha Creación</th>
-      <th>Comentarios</th>
-      <th>Cliente</th>
-      <th>Actions</th> <!-- Add this column for Edit and Delete buttons -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr >
-      <td>1</td>
-      <td>12121</td>
-      <td>12123</td>
-      <td>rewservado</td>
-      <td>1000</td>
-      <td>12/12/1987</td>
-      <td>todo son una melda</td>
-      <td>Jose</td> <!-- Assuming 'cliente' has a 'nombre' property -->
-      <td>
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-secondary dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Actions
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" >
-              Edit
-            </a>
-            <a class="dropdown-item text-danger" >
-              Delete
-            </a>
-          </div>
+<div class="card table-responsive">
+    <div class="card-header">
+        <h3>Lista de Reservas</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-8">
+                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <i class="fa-solid fa-plus"></i> Crear Nuevo
+                </button>
+            </div>
+            <div class="col-sm-6 col-md-4 text-right">
+                <form asp-action="ListarClientes" asp-controller="Cliente" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" >
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-warning"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </td>
+    </div>
 
-    </tr>
-    <tr >
-      <td>1</td>
-      <td>12121</td>
-      <td>12123</td>
-      <td>rewservado</td>
-      <td>1000</td>
-      <td>12/12/1987</td>
-      <td>todo son una melda</td>
-      <td>Jose</td> <!-- Assuming 'cliente' has a 'nombre' property -->
-      <td>
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-secondary dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Actions
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" >
-              Edit
-            </a>
-            <a class="dropdown-item text-danger" >
-              Delete
-            </a>
-          </div>
-        </div>
-      </td>
-
-    </tr>
-    </tbody>
-  </table>
+    <table id="tablaHabitacion" class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              <th>Reserva ID</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+              <th>Estado</th>
+              <th>Precio Total</th>
+              <th>Fecha Creación</th>
+              <th>Comentarios</th>
+              <th>Cliente</th>
+              <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>12121</td>
+                  <td>12123</td>
+                  <td>rewservado</td>
+                  <td>1000</td>
+                  <td>12/12/1987</td>
+                  <td>todo son una melda</td>
+                  <td>Jose</td>
+                    <td>
+                        <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>12121</td>
+                  <td>12123</td>
+                  <td>rewservado</td>
+                  <td>1000</td>
+                  <td>12/12/1987</td>
+                  <td>todo son una melda</td>
+                  <td>Jose</td>
+                    <td>
+                        <a href="" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a href="" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
 </div>
 
 
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Edit Reservation</h5>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Edit form goes here -->
-        <form>
-          <!-- Edit fields go here -->
-        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultId" class="form-label">ID</label>
+                <input type="text" class="form-control" id="validationDefaultId" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="validationDefaultName" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultCorreo" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="validationDefaultCorreo" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultTelefono" class="form-label">Telefono</label>
+                <input type="text" class="form-control" id="validationDefaultTelefono" required>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="validationDefaultDireccion" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultFechaRegistro" class="form-label">Fecha de Registro</label>
+                <input type="date" class="form-control" id="validationDefaultFechaRegistro" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="validationDefaultDireccion" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultFechaRegistro" class="form-label">Fecha de Registro</label>
+                <input type="date" class="form-control" id="validationDefaultFechaRegistro" required>
+              </div>
+              <!-- Agregar aquí los otros dos campos -->
+            </form>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save Changes</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

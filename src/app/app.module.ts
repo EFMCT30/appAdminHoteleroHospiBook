@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ContentComponent } from './content/content.component';
 import { ReservaComponent } from './reserva/reserva.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -22,7 +23,8 @@ import { ReservaComponent } from './reserva/reserva.component';
     LoginComponent,
     LayoutComponent,
     ContentComponent,
-    ReservaComponent
+    ReservaComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

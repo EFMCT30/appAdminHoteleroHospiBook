@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: 'profile',component: LayoutComponent ,data: { 'title': 'Profile' },
   },
-  { path: 'reserva', component: LayoutComponent,data: { 'title': 'Reserva' }}
+  { path: 'reserva', component: LayoutComponent,data: { 'title': 'Reserva' }},
+  { path: 'dashboard', component: LayoutComponent,data: { 'title': 'DashBoard' }}
 
 ];
 

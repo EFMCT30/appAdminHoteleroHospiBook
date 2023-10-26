@@ -1,6 +1,19 @@
-<ng-container *ngIf="isProfileRoute; else reserva">
-    <app-profile></app-profile>
+<ng-container *ngIf="isProfileRoute; then componente1 else condicion2">
 </ng-container>
-<ng-template #reserva>
-    <app-reserva></app-reserva>
+
+<ng-template #componente1>
+  <app-profile></app-profile>
+</ng-template>
+
+<ng-template #condicion2>
+  <ng-container *ngIf="isProfileRoute; then componente2 else componente3">
+  </ng-container>
+</ng-template>
+
+<ng-template #componente2>
+  <app-dashboard></app-dashboard>
+</ng-template>
+
+<ng-template #componente3>
+  <app-reserva></app-reserva>
 </ng-template>
