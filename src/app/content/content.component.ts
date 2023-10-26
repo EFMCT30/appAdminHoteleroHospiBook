@@ -8,9 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ContentComponent {
   isProfileRoute: boolean = false;
+  isDashboardRoute: boolean=false;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.isProfileRoute = this.route.snapshot.routeConfig?.path === 'profile';
+    this.isDashboardRoute = this.route.snapshot.routeConfig?.path === 'dashboard';
+
   }
 }
