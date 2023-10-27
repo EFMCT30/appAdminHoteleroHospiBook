@@ -1,1 +1,128 @@
-<p>habitacion works!</p>
+<div class="card table-responsive">
+    <div class="card-header">
+        <h3>Lista de Habitaciones</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-8">
+                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <i class="fa-solid fa-plus"></i> Crear Nuevo
+                </button>
+            </div>
+            <div class="col-sm-6 col-md-4 text-right">
+                <form asp-action="ListarHabitaciones" asp-controller="Habitacion" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" >
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-warning"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table id="tablaHabitacion" class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              <th>Habitacion ID</th>
+              <th>Capacidad</th>
+              <th>Disponible</th>
+              <th>Fecha Ultima de Mantenimiento</th>
+              <th>Nro Habitación</th>
+              <th>Precio de la noche</th>
+              <th>Tipo</th>
+              <th>Hotel</th>
+              <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>50</td>
+                  <td>1</td>
+                  <td>10/10/2023</td>
+                  <td>10</td>
+                  <td>250.50</td>
+                  <td>Tipo ejemplo</td>
+                  <td>Marriot</td>
+                    <td>
+                        <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>50</td>
+                    <td>1</td>
+                    <td>10/10/2023</td>
+                    <td>10</td>
+                    <td>250.50</td>
+                    <td>Tipo ejemplo</td>
+                    <td>Marriot</td>
+                    <td>
+                        <a href="" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a href="" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Habitación</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultCapacidad" class="form-label">Capacidad</label>
+                <input type="text" class="form-control" id="validationDefaultCapacidad" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultDisponible" class="form-label">Disponible</label>
+                <input type="text" class="form-control" id="validationDefaultDisponible" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultFechaUltimaMantiemiento" class="form-label">Fecha ultima de mantenimiento</label>
+                <input type="date" class="form-control" id="validationDefaultFechaUltimaMantiemiento" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultNumeroHabitacion" class="form-label">Número de Habitación</label>
+                <input type="text" class="form-control" id="validationDefaultNumeroHabitacion" required>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultPrecioNoche" class="form-label">Precio de la Noche</label>
+                <input type="text" class="form-control" id="validationDefaultPrecioNoche" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultTipo" class="form-label">Tipo</label>
+                <input type="text" class="form-control" id="validationDefaultTipo" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultHotel" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="validationDefaultDireccion" required>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
