@@ -28,43 +28,29 @@
         <thead>
             <tr>
               <th>Hotel ID</th>
+              <th>Nombre</th>
               <th>Categoria</th>
               <th>Descripción</th>
               <th>Dirección</th>
               <th>Estrellas</th>
               <th>Fecha de Construcción</th>
-              <th>Nombre</th>
               <th>Teléfono</th>
               <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>cualquiera</td>
-                  <td>Merequetengue</td>
-                  <td>av.etc</td>
-                  <td>4</td>
-                  <td>10/10/1950</td>
-                  <td>Marriot</td>
-                  <td>987654321</td>
+                <tr *ngFor="let hotelItem of hotel">
+                  <th scope="row">{{hotelItem.hotelid}}</th>
+                  <td>{{hotelItem.nombre}}</td>
+                  <td>{{hotelItem.categoria}}</td>
+                  <td>{{hotelItem.descripcion}}</td>
+                  <td>{{hotelItem.direccion}}</td>
+                  <td>{{hotelItem.estrellas}}</td>
+                  <td>{{hotelItem.fechaConstruccion}}</td>
+                  <td>{{hotelItem.telefono}}</td>
                     <td>
                         <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
                         <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>:v</td>
-                    <td>Meh</td>
-                    <td>av.etc2</td>
-                    <td>3</td>
-                    <td>10/10/1970</td>
-                    <td>Stella</td>
-                    <td>987654322</td>
-                    <td>
-                        <a href="" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
-                        <a href="" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
                     </td>
                 </tr>
         </tbody>
