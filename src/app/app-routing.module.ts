@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'profile',component: LayoutComponent ,data: { 'title': 'Profile' },
   },
   { path: 'reserva', component: LayoutComponent,data: { 'title': 'Reserva' }},
-  { path: 'dashboard', component: LayoutComponent,data: { 'title': 'DashBoard' }},
+  { path: 'dashboard', component: LayoutComponent,data: { 'title': 'Panel de Control' }},
   { path: 'habitacion', component: LayoutComponent,data: { 'title': 'Habitacion' }},
   { path: 'hotel', component: LayoutComponent,data: { 'title': 'Hotel' }},
 

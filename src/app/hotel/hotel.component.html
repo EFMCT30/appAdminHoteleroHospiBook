@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="col-sm-6 col-md-4 text-right">
-                <form asp-action="ListarHoteles" asp-controller="Hotel" method="post">
+                <form>
                     <div class="row">
                         <div class="col">
                             <input type="text" class="form-control" >
@@ -30,7 +30,7 @@
               <th>Hotel ID</th>
               <th>Categoria</th>
               <th>Descripción</th>
-              <th>Dirección/th>
+              <th>Dirección</th>
               <th>Estrellas</th>
               <th>Fecha de Construcción</th>
               <th>Nombre</th>
@@ -97,7 +97,7 @@
               </div>
               <div class="col-12">
                 <label for="validationDefaultNumeroEstrellas" class="form-label">Estrellas</label>
-                <input type="radio" class="form-control" id="validationDefaultNumeroEstrellas" required>
+                <input type="text" class="form-control" id="validationDefaultNumeroEstrellas" required>
               </div>
             </form>
           </div>
