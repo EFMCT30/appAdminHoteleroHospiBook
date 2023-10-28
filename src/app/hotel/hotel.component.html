@@ -1,1 +1,128 @@
-<p>hotel works!</p>
+<div class="card table-responsive">
+    <div class="card-header">
+        <h3>Lista de Hoteles</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-8">
+                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <i class="fa-solid fa-plus"></i> Crear Nuevo
+                </button>
+            </div>
+            <div class="col-sm-6 col-md-4 text-right">
+                <form asp-action="ListarHoteles" asp-controller="Hotel" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" >
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-warning"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table id="tablaHotel" class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+              <th>Hotel ID</th>
+              <th>Categoria</th>
+              <th>Descripción</th>
+              <th>Dirección/th>
+              <th>Estrellas</th>
+              <th>Fecha de Construcción</th>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>cualquiera</td>
+                  <td>Merequetengue</td>
+                  <td>av.etc</td>
+                  <td>4</td>
+                  <td>10/10/1950</td>
+                  <td>Marriot</td>
+                  <td>987654321</td>
+                    <td>
+                        <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>:v</td>
+                    <td>Meh</td>
+                    <td>av.etc2</td>
+                    <td>3</td>
+                    <td>10/10/1970</td>
+                    <td>Stella</td>
+                    <td>987654322</td>
+                    <td>
+                        <a href="" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
+                        <a href="" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultCategoria" class="form-label">Categoria</label>
+                <input type="text" class="form-control" id="validationDefaultCategoria" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultDescripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="validationDefaultDescripcion" required>
+            </div>
+              <div class="col-12">
+                <label for="validationDefaultFechaDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="validationDefaultFechaDireccion" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultNumeroEstrellas" class="form-label">Estrellas</label>
+                <input type="radio" class="form-control" id="validationDefaultNumeroEstrellas" required>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form class="row g-3">
+              <div class="col-12">
+                <label for="validationDefaultFechaConstruccion" class="form-label">Fecha de construcción </label>
+                <input type="date" class="form-control" id="validationDefaultFechaConstruccion" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="validationDefaultTipo" required>
+              </div>
+              <div class="col-12">
+                <label for="validationDefaultTelefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="validationDefaultTelefono" required>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
