@@ -13,6 +13,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HabitacionComponent } from './habitacion/habitacion.component';
 import { HotelComponent } from './hotel/hotel.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -30,10 +31,11 @@ import { HotelComponent } from './hotel/hotel.component';
     HabitacionComponent,
     HotelComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
