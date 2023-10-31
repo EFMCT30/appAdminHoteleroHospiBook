@@ -28,4 +28,25 @@ export class HotelserviceService {
         });
     });
   }
+
+  //Registro Hotel
+
+  public addHotel(token: string, newHotelData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .post(`${this.ruta}/hoteles/create`, newHotelData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+  
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelserviceService } from '../service/hotelservice.service';
 import { TokenService } from '../service/token.service';
+import { Hotel } from '../../Entity/Hotel';
 
 @Component({
   selector: 'app-hotel',
@@ -9,7 +10,8 @@ import { TokenService } from '../service/token.service';
 })
 export class HotelComponent implements OnInit {
   hotel: any[] = [];
-  token: string | null = null; // Initialize the token as null
+  token: string | null = null;
+  newHotel: Hotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
 
   constructor(
     private axiosHotelService: HotelserviceService,
@@ -17,10 +19,9 @@ export class HotelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.token = this.tokenService.getToken(); // Retrieve the token
+    this.token = this.tokenService.getToken(); 
 
     if (this.token) {
-    // Now, you can use the token to fetch hotels
     this.axiosHotelService.getHotels(this.token).subscribe(
       (hoteles) => {
         this.hotel = hoteles;
@@ -31,4 +32,21 @@ export class HotelComponent implements OnInit {
     );
   }
   }
+
+  addNewHotel() {
+    console.log(this.newHotel); 
+    if (this.token) {
+      this.axiosHotelService.addHotel(this.token, this.newHotel).subscribe(
+        (response) => {
+          console.log('Nuevo hotel registrado:', response);
+          this.hotel.push(response);
+          this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
+        },
+        (error) => {
+          console.error('Error al registrar el nuevo hotel:', error);
+        }
+      );
+    }
+  }
+ 
 }
