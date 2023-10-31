@@ -14,6 +14,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HabitacionComponent } from './habitacion/habitacion.component';
 import { HotelComponent } from './hotel/hotel.component';
 import {FormsModule} from "@angular/forms";
+import { FrontlayaoutComponent } from './frontlayaout/frontlayaout.component';
+import { NavbarComponent } from './client/navbar/navbar.component';
+import { BannerComponent } from './client/banner/banner.component';
 
 
 
@@ -29,7 +32,10 @@ import {FormsModule} from "@angular/forms";
     ReservaComponent,
     DashboardComponent,
     HabitacionComponent,
-    HotelComponent
+    HotelComponent,
+    FrontlayaoutComponent,
+    NavbarComponent,
+    BannerComponent
   ],
     imports: [
         BrowserModule,
