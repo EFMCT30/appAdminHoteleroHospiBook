@@ -9,7 +9,7 @@ import { TokenService } from '../service/token.service';
 })
 export class HabitacionComponent implements OnInit {
   habitaciones: any[] = [];
-  token: string = ''; // Add a token property
+  token: string | null = null; // Initialize the token as null
 
   constructor(
     private habitacionService: HabitacionService,
@@ -18,15 +18,17 @@ export class HabitacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken(); // Retrieve the token
-    // Now, you can use the token to fetch habitaciones
-    this.habitacionService.getHabitaciones(this.token).subscribe(
-      (habitaciones) => {
-        this.habitaciones = habitaciones;
-      },
-      (error) => {
-        console.error('Error fetching habitaciones:', error);
-      }
-    );
+
+    if (this.token) {
+      // Only fetch habitaciones if the token is not null
+      this.habitacionService.getHabitaciones(this.token).subscribe(
+        (habitaciones) => {
+          this.habitaciones = habitaciones;
+        },
+        (error) => {
+          console.error('Error fetching habitaciones:', error);
+        }
+      );
+    }
   }
 }
-

@@ -9,7 +9,7 @@ import { TokenService } from '../service/token.service';
 })
 export class HotelComponent implements OnInit {
   hotel: any[] = [];
-  token: string = ''; // Add a token property
+  token: string | null = null; // Initialize the token as null
 
   constructor(
     private axiosHotelService: HotelserviceService,
@@ -18,6 +18,8 @@ export class HotelComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken(); // Retrieve the token
+
+    if (this.token) {
     // Now, you can use the token to fetch hotels
     this.axiosHotelService.getHotels(this.token).subscribe(
       (hoteles) => {
@@ -27,5 +29,6 @@ export class HotelComponent implements OnInit {
         console.error('Error fetching hotels:', error);
       }
     );
+  }
   }
 }
