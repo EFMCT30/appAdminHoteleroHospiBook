@@ -48,5 +48,24 @@ export class HotelserviceService {
         });
     });
   }
+
+  //Eliminar un Hotel
+  public deleteHotel(token: string, hotelId: number): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .delete(`${this.ruta}/hoteles/${hotelId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
   
 }

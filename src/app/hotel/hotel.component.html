@@ -50,7 +50,7 @@
                   <td>{{hotelItem.telefono}}</td>
                     <td>
                         <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
-                        <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                        <button (click)="deleteHotel(hotelItem.hotelId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
                     </td>
                 </tr>
         </tbody>

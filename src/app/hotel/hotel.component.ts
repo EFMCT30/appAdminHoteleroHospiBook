@@ -48,5 +48,20 @@ export class HotelComponent implements OnInit {
       );
     }
   }
+
+  deleteHotel(hotelId: number) {
+    if (this.token) {
+      this.axiosHotelService.deleteHotel(this.token, hotelId).subscribe(
+        (response) => {
+          console.log('Hotel eliminado ID:', hotelId);
+          // Remover el hotel eliminado de la lista
+          this.hotel = this.hotel.filter((h) => h.hotelId !== hotelId);
+        },
+        (error) => {
+          console.error('Error al eliminar el hotel:', error);
+        }
+      );
+    }
+  }
  
 }
