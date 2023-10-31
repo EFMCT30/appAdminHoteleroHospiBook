@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import axios from 'axios';
 import { Router } from '@angular/router';
-import { TokenService } from '../token.service'; // Import the TokenService
+import { TokenService } from '../service/token.service'; // Import the TokenService
 
 @Component({
   selector: 'app-login',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelserviceService } from '../service/hotelservice.service';
-import { TokenService } from '../token.service';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-hotel',
