@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelserviceService } from '../service/hotelservice.service';
-import { Router } from '@angular/router';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-hotel',
   templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.css']
+  styleUrls: ['./hotel.component.css'],
 })
 export class HotelComponent implements OnInit {
+  hotel: any[] = [];
+  token: string = ''; // Add a token property
 
-  hotel: any;
-
-  constructor(private h: HotelserviceService, private router:Router){}
+  constructor(
+    private axiosHotelService: HotelserviceService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
-    this.h.Gethoteles().subscribe( hoteles => {
-      this.hotel = hoteles;
-    })
+    this.token = this.tokenService.getToken(); // Retrieve the token
+    // Now, you can use the token to fetch hotels
+    this.axiosHotelService.getHotels(this.token).subscribe(
+      (hoteles) => {
+        this.hotel = hoteles;
+      },
+      (error) => {
+        console.error('Error fetching hotels:', error);
+      }
+    );
   }
 }
