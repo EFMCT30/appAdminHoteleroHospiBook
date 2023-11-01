@@ -48,6 +48,26 @@ export class HotelserviceService {
         });
     });
   }
+  
+
+  //actulizar
+  public updateHotel(token: string, hotelId: number, updatedHotelData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .put(`${this.ruta}/hoteles/${hotelId}`, updatedHotelData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
 
   //Eliminar un Hotel
   public deleteHotel(token: string, hotelId: number): Observable<any> {
