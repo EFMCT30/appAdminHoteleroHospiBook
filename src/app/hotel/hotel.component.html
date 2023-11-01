@@ -49,66 +49,106 @@
                   <td>{{hotelItem.fechaConstruccion}}</td>
                   <td>{{hotelItem.telefono}}</td>
                     <td>
-                        <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
-                        <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                      <button data-bs-toggle="modal" data-bs-target="#updateHotelModal" (click)="openUpdateModal(hotelItem)" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
+                        <button (click)="deleteHotel(hotelItem.hotelId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
                     </td>
                 </tr>
         </tbody>
     </table>
 </div>
 
+<!--Modal Registrar-->
+<div class="modal fade" #exampleModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <div class="col-12">
+            <label for="txtNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="txtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
+          </div>
+          <div class="col-12">
+            <label for="txtDireccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="txtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
+          </div>
+          <div class="col-12">
+            <label for="txtTelefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="txtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
+          </div>
+          <div class="col-12">
+            <label for="txtEstrellas" class="form-label">Estrellas</label>
+            <input type="number" class="form-control" id="txtEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+          </div>
+          <div class="col-12">
+            <label for="txtDescripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="txtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
+          </div>
+          <div class="col-12">
+            <label for="txtFecha" class="form-label">Fecha de construcción</label>
+            <input type="text" class="form-control" id="txtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
+          </div>
+          <div class="col-12">
+            <label for="txtCategoria" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="txtCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="addNewHotel()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel</h1>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <div class="row">-->
-<!--          <div class="col-md-6">-->
-<!--            <form class="row g-3">-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultCategoria" class="form-label">Categoria</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultCategoria" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultDescripcion" class="form-label">Descripción</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultDescripcion" required>-->
-<!--            </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultFechaDireccion" class="form-label">Dirección</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultFechaDireccion" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultNumeroEstrellas" class="form-label">Estrellas</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultNumeroEstrellas" required>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--          <div class="col-md-6">-->
-<!--            <form class="row g-3">-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultFechaConstruccion" class="form-label">Fecha de construcción </label>-->
-<!--                <input type="date" class="form-control" id="validationDefaultFechaConstruccion" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultNombre" class="form-label">Nombre</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultTipo" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultTelefono" class="form-label">Teléfono</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultTelefono" required>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>-->
-<!--        <button type="button" class="btn btn-primary">Guardar</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<!--Modal Actualizar-->
+<div class="modal fade" id="updateHotelModal" tabindex="-1" aria-labelledby="updateHotelModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <div class="col-12">
+            <label for="updateTxtNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtDireccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtTelefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtEstrellas" class="form-label">Estrellas</label>
+            <input type="number" class="form-control" id="updateTxtEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtDescripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="updateTxtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtFecha" class="form-label">Fecha de construcción</label>
+            <input type="text" class="form-control" id="updateTxtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtCategoria" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="updateTxtCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="addNewHotel()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

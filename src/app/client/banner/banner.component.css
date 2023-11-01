@@ -1,0 +1,66 @@
+/*---------------------------------------------------- */
+/*----------------------------------------------------*/
+/*============= Start banner_area css =============*/
+.banner_area {
+  background: #04091e;
+  position: relative;
+  z-index: 1;
+}
+
+.banner_area .bg-parallax {
+  background-image: url("/assets/banner_bg.jpg") ;
+  opacity: 0.50;
+}
+
+
+.banner_area .position {
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.booking_table {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 800px;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 125%;
+  bottom: 0;
+  z-index: -1;
+}
+
+.banner_content {
+  color: #fff;
+  margin-bottom: 94px;
+}
+
+.banner_content h6 {
+  font-size: 14px;
+  line-height: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 400;
+}
+
+.banner_content h2 {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: 700;
+}
+
+.banner_content p {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 10px 0px 20px;
+}
+
+/*============= End banner_area css =============*/

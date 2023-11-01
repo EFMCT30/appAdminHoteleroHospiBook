@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import {AuthGuard} from "./service/auth-guard.service";
+import {FrontlayaoutComponent} from "./frontlayaout/frontlayaout.component";
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'index', component: FrontlayaoutComponent },
   {
     path: '',
     canActivate: [AuthGuard], // Apply the AuthGuard to all routes

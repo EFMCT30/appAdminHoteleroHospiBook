@@ -28,4 +28,64 @@ export class HotelserviceService {
         });
     });
   }
+
+  //Registro Hotel
+
+  public addHotel(token: string, newHotelData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .post(`${this.ruta}/hoteles/create`, newHotelData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+  
+
+  //actulizar
+  public updateHotel(token: string, hotelId: number, updatedHotelData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .put(`${this.ruta}/hoteles/${hotelId}`, updatedHotelData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  //Eliminar un Hotel
+  public deleteHotel(token: string, hotelId: number): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .delete(`${this.ruta}/hoteles/${hotelId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+  
 }
