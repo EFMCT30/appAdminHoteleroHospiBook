@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HotelserviceService } from '../service/hotelservice.service';
 import { TokenService } from '../service/token.service';
 import { Hotel } from '../../Entity/Hotel';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-hotel',
@@ -10,9 +11,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./hotel.component.css'],
 })
 export class HotelComponent implements OnInit {
+
+  @ViewChild('exampleModal') exampleModal!: ElementRef;
+  @ViewChild('updateHotelModal') updateHotelModal!: ElementRef;
+
   hotel: any[] = [];
   token: string | null = null;
   newHotel: Hotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
+  terminoBusqueda: string = '';
+  hotelesFiltrados: any[] = [];
 
   constructor(
     private axiosHotelService: HotelserviceService,
@@ -34,17 +41,27 @@ export class HotelComponent implements OnInit {
     }
   }
 
-
+  camposRequeridosEstanCompletos(newHotel: Hotel): boolean {
+    return (
+      !!newHotel.nombre &&
+      !!newHotel.direccion &&
+      !!newHotel.telefono &&
+      !!newHotel.estrellas &&
+      !!newHotel.descripcion &&
+      !!newHotel.fechaConstruccion &&
+      !!newHotel.categoria
+    );
+  }
 
   addNewHotel() {
-    console.log(this.newHotel);
-    if (this.token) {
+    // Verifica si los campos requeridos no están vacíos
+    if (this.token && this.camposRequeridosEstanCompletos(this.newHotel)) {
       this.axiosHotelService.addHotel(this.token, this.newHotel).subscribe(
         (response) => {
           console.log('Nuevo hotel registrado:', response);
           this.hotel.push(response);
           this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
-
+  
           Swal.fire({
             icon: 'success',
             title: '¡Hotel añadido!',
@@ -61,6 +78,13 @@ export class HotelComponent implements OnInit {
           });
         }
       );
+    } else {
+      // Muestra un mensaje al usuario indicando que los campos están incompletos
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos requeridos incompletos',
+        text: 'Por favor completa todos los campos requeridos.',
+      });
     }
   }
 
@@ -99,13 +123,24 @@ export class HotelComponent implements OnInit {
   }
 
   updateHotel() {
-    console.log('Datos para la actualización:', this.newHotel);
     if (this.token && this.newHotel.hotelId !== 0) {
       this.axiosHotelService.updateHotel(this.token, this.newHotel.hotelId, this.newHotel).subscribe(
         (response) => {
           console.log('Hotel actualizado:', response);
-          this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
-          
+  
+          // Busca el índice del hotel actualizado en this.hotel
+          const index = this.hotel.findIndex(h => h.hotelId === this.newHotel.hotelId);
+  
+          if (index !== -1) {
+            // Actualiza el hotel en this.hotel con los datos del servidor
+            this.hotel[index] = response;
+          }
+          Swal.fire({
+            icon: 'success',
+            title: '¡Hotel actualizado!',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         },
         (error) => {
           console.error('Error al actualizar el hotel:', error);
@@ -118,4 +153,21 @@ export class HotelComponent implements OnInit {
       );
     }
   }
+
+  buscarHoteles() {
+    if (this.token && this.terminoBusqueda.trim() !== '') {
+      this.axiosHotelService.searchHotelsByInitials(this.token, this.terminoBusqueda).subscribe(
+        (hoteles) => {
+          this.hotelesFiltrados = hoteles;
+        },
+        (error) => {
+          console.error('Error al buscar hoteles:', error);
+          // Manejo del error, podría ser un mensaje o alguna acción específica.
+        }
+      );
+    } else {
+      this.hotelesFiltrados = [];
+    }
+  }
+
 }

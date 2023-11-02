@@ -69,6 +69,7 @@ export class HotelserviceService {
     });
   }
 
+
   //Eliminar un Hotel
   public deleteHotel(token: string, hotelId: number): Observable<any> {
     return new Observable<any>((observer) => {
@@ -87,5 +88,24 @@ export class HotelserviceService {
         });
     });
   }
+
+  public searchHotelsByInitials(token: string, initials: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/hoteles/buscarFiltro/${initials}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+  
   
 }
