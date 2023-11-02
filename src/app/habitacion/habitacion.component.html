@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6 col-md-8">
-                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearModal">
+                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <i class="fa-solid fa-plus"></i> Crear Nuevo
                 </button>
             </div>
@@ -39,132 +39,68 @@
             </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let habitacion of habitaciones">
-          <td>{{ habitacion.habitacionId}}</td>
-          <td>{{ habitacion.capacidad }}</td>
-          <td>{{ habitacion.disponible ? 'Sí' : 'No' }}</td>
-          <td>{{ habitacion.fechaUltimaMantenimiento }}</td>
-          <td>{{ habitacion.numeroHabitacion }}</td>
-          <td>{{ habitacion.precioNoche | currency: 'USD' }}</td>
-          <td>{{ habitacion.tipo }}</td>
-          <td>{{ habitacion.hotelId }}</td>
+          <tr *ngFor="let habitacionItem of habitaciones ">
+          <td>{{ habitacionItem.habitacionId}}</td>
+          <td>{{ habitacionItem.capacidad }}</td>
+          <td>{{ habitacionItem.disponible ? 'Sí' : 'No' }}</td>
+          <td>{{ habitacionItem.fechaUltimaMantenimiento }}</td>
+          <td>{{ habitacionItem.numeroHabitacion }}</td>
+          <td>{{ habitacionItem.precioNoche | currency: 'USD' }}</td>
+          <td>{{ habitacionItem.tipo }}</td>
+          <td>{{ habitacionItem.hotelId }}</td>
           <td>
             <a class="btn btn-outline-primary" ><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
-            <button (click)="deleteHabitacion(habitacion.habitacionId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
+           <button (click)="deleteHabitacion(habitacionItem.habitacionId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
           </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-
-
-<div class="modal fade" id="actualizarModal" tabindex="-1" aria-labelledby="actualizarModalLabel" aria-hidden="true">
+  
+  <div class="modal fade" #exampleModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="actualizarModalLabel">Habitación</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <form class="row g-3">
-                <div class="col-12">
-                  <label for="validationDefaultCapacidad" class="form-label">Capacidad</label>
-                  <input type="text" class="form-control" id="validationDefaultCapacidad" required>
-                </div>
-                <div class="col-12">
-                  <label for="validationDefaultDisponible" class="form-label">Disponible</label>
-                  <input type="text" class="form-control" id="validationDefaultDisponible" required>
-                </div>
-                <div class="col-12">
-                  <label for="validationDefaultFechaUltimaMantenimiento" class="form-label">Fecha ultima de mantenimiento</label>
-                  <input type="datetime" class="form-control" id="validationDefaultFechaUltimaMantenimiento" required>
-                </div>
-                <div class="col-12">
-                  <label for="validationDefaultNumeroHabitacion" class="form-label">Número de Habitación</label>
-                  <input type="text" class="form-control" id="validationDefaultNumeroHabitacion" required>
-                </div>
-              </form>
+          <form class="row g-3">
+            <div class="col-12">
+              <label for="txtCapacidad" class="form-label">Capacidad</label>
+              <input type="number" class="form-control" id="txtCapacidad" name="capacidad" required [(ngModel)]="newHabitacion.capacidad">
             </div>
-            <div class="col-md-6">
-              <form class="row g-3">
-                <div class="col-12">
-                  <label for="validationDefaultPrecioNoche" class="form-label">Precio de la Noche</label>
-                  <input type="text" class="form-control" id="validationDefaultPrecioNoche" required>
-                </div>
-                <div class="col-12">
-                  <label for="validationDefaultTipo" class="form-label">Tipo</label>
-                  <input type="text" class="form-control" id="validationDefaultTipo" required>
-                </div>
-                <div class="col-12">
-                  <label for="validationDefaultDireccion" class="form-label">Dirección</label>
-                  <input type="text" class="form-control" id="validationDefaultDireccion" required>
-                </div>
-              </form>
+            <div class="col-12">
+              <label for="txtDisponible" class="form-label">Disponible</label>
+              <input type="number" class="form-control" id="txtDisponible" name="disponible" required [(ngModel)]="newHabitacion.disponible">
             </div>
-          </div>
+            <div class="col-12">
+              <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
+              <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+            </div>
+            <div class="col-12">
+              <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
+              <input type="number" class="form-control" id="txtNumeroHabitaciones" name="numeroHabitacion required" [(ngModel)]="newHabitacion.numeroHabitacion">
+            </div>
+            <div class="col-12">
+              <label for="txtPrecioNoche" class="form-label">Precio por Noche</label>
+              <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
+            </div>
+            <div class="col-12">
+              <label for="txtTipo" class="form-label">Tipo</label>
+              <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+            </div>
+            <div class="col-12">
+              <label for="txtHotelid" class="form-label">HotelId</label>
+              <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-primary" (click)="addNewHabitacion()">Guardar</button>
         </div>
       </div>
     </div>
   </div>
-  
- <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="crearModalLabel">Habitación</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form class="row g-3">
-                            <div class="col-12">
-                                <label for="validationDefaultCapacidad" class="form-label">Capacidad</label>
-                                <input type="text" class="form-control" id="validationDefaultCapacidad" [(ngModel)]="newHabitacion.capacidad" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="validationDefaultDisponible" class="form-label">Disponible</label>
-                                <input type="text" class="form-control" id="validationDefaultDisponible" [(ngModel)]="newHabitacion.disponible" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="validationDefaultFechaUltimaMantenimiento" class="form-label">Fecha última de mantenimiento</label>
-                                <input type="date" class="form-control" id="validationDefaultFechaUltimaMantenimiento" [(ngModel)]="newHabitacion.fechaUltimaMantenimiento" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="validationDefaultNumeroHabitacion" class="form-label">Número de Habitación</label>
-                                <input type="text" class="form-control" id="validationDefaultNumeroHabitacion" [(ngModel)]="newHabitacion.numeroHabitacion" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <form class="row g-3">
-                            <div class="col-12">
-                                <label for="validationDefaultPrecioNoche" class="form-label">Precio de la Noche</label>
-                                <input type="text" class="form-control" id="validationDefaultPrecioNoche" [(ngModel)]="newHabitacion.precioNoche" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="validationDefaultTipo" class="form-label">Tipo</label>
-                                <input type="text" class="form-control" id="validationDefaultTipo" [(ngModel)]="newHabitacion.tipo" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="validationDefaultDireccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="validationDefaultDireccion" [(ngModel)]="newHabitacion.hotelId" required>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="addNewHotel()">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>

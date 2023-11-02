@@ -11,7 +11,7 @@ export class HabitacionService {
 
   constructor() {}
 
-  public getHabitaciones(token: string): Observable<any> {
+  public getHabitacion(token: string): Observable<any> {
     return new Observable<any>((observer) => {
       axios
         .get(`${this.ruta}/habitaciones`, {
@@ -29,14 +29,15 @@ export class HabitacionService {
     });
   }
 
-  public createHabitacion(token: string, nuevaHabitacion: Habitacion): Observable<any> {
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
   
+  public addHabitacion(token: string, newHabitacionData: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
-        .post(`${this.ruta}/habitaciones/create`, nuevaHabitacion, { headers })
+        .post(`${this.ruta}/habitaciones/create`, newHabitacionData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           observer.next(response.data);
           observer.complete();
@@ -64,5 +65,27 @@ export class HabitacionService {
         });
     });
   }
+
+  //actulizar
+  public updateHabitacion(token: string, habitacionId: number, updatedHabitacionData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .put(`${this.ruta}/habitaciones/${habitacionId}`, updatedHabitacionData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+
+
   
 }

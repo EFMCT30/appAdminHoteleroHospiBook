@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HabitacionService } from '../service/habitacion.service';
 import { TokenService } from '../service/token.service';
-import  Swal  from 'sweetalert2';
-import { Habitacion } from 'src/Entity/Habitacion';
+import Swal from 'sweetalert2';
 
+
+
+
+import { Habitacion } from 'src/Entity/Habitacion';
 
 @Component({
   selector: 'app-habitacion',
@@ -11,9 +14,10 @@ import { Habitacion } from 'src/Entity/Habitacion';
   styleUrls: ['./habitacion.component.css'],
 })
 export class HabitacionComponent implements OnInit {
-  habitaciones: any[] = [];
-  token: string | null = null; // Initialize the token as null
-  newHabitacion: Habitacion = new Habitacion(0, "", 0, 0, false, new Date(), 0);
+  habitaciones: Habitacion[] = [];
+  token: string | null = null;
+  newHabitacion: Habitacion = new Habitacion(0,0, "",0,0,false,new Date(), 0);
+  
 
   constructor(
     private habitacionService: HabitacionService,
@@ -21,13 +25,11 @@ export class HabitacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.token = this.tokenService.getToken(); // Retrieve the token
+    this.token = this.tokenService.getToken();
 
     if (this.token) {
-      // Only fetch habitaciones if the token is not null
-      this.habitacionService.getHabitaciones(this.token).subscribe(
+      this.habitacionService.getHabitacion(this.token).subscribe(
         (habitaciones) => {
-         console.log(habitaciones);
           this.habitaciones = habitaciones;
         },
         (error) => {
@@ -37,41 +39,36 @@ export class HabitacionComponent implements OnInit {
     }
   }
 
-
-  addNewHotel() {
-    console.log(this.newHabitacion); 
+  addNewHabitacion() {
+    console.log(this.newHabitacion);
     if (this.token) {
-      this.habitacionService.createHabitacion(this.token, this.newHabitacion).subscribe(
+      this.habitacionService.addHabitacion(this.token, this.newHabitacion).subscribe(
         (response) => {
-          console.log('Nuevo habitación registrado:', response);
+          console.log('Nueva habitación registrada:', response);
           this.habitaciones.push(response);
-          this.newHabitacion = new Habitacion(0, '', 0, 0, false, new Date(), 0);
-  
-          // Utilizando SweetAlert2 para mostrar un mensaje de confirmación
+          this.newHabitacion = new Habitacion(0,0, "",0,0,false,new Date(), 0);
+
           Swal.fire({
             icon: 'success',
             title: '¡Habitación añadida!',
             showConfirmButton: false,
-            timer: 1500 // Opcional: tiempo en milisegundos antes de que se cierre el mensaje
+            timer: 1500,
           });
         },
         (error) => {
-          console.error('Error al registrar la habitación:', error);
-          // Mostrar un mensaje de error con SweetAlert2
+          console.error('Error al registrar la nueva habitación:', error);
           Swal.fire({
             icon: 'error',
             title: 'Error al añadir la habitación',
-            text: 'Hubo un problema al registrar la habitación, por favor intenta de nuevo.'
+            text: 'Hubo un problema al registrar la habitación, por favor intenta de nuevo.',
           });
         }
       );
     }
   }
 
-
   deleteHabitacion(habitacionId: number) {
     if (this.token !== null) {
-      // Mostrar el mensaje de confirmación con SweetAlert
       Swal.fire({
         title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
@@ -79,14 +76,13 @@ export class HabitacionComponent implements OnInit {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, ¡elimínalo!'
-      }).then((result: { isConfirmed: any; }) => {
-        if (result.isConfirmed) { // Verificar si se confirmó la eliminación
-          if (this.token !== null) { // Verificar nuevamente el token antes de hacer la llamada
+        confirmButtonText: 'Sí, ¡elimínalo!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (this.token !== null) {
             this.habitacionService.deleteHabitacion(this.token, habitacionId).subscribe(
               (response) => {
-                console.log('Habitación eliminado ID:', habitacionId);
-                // Remover el hotel eliminado de la lista
+                console.log('Habitación eliminada ID:', habitacionId);
                 this.habitaciones = this.habitaciones.filter((h) => h.habitacionId !== habitacionId);
               },
               (error) => {
@@ -98,8 +94,4 @@ export class HabitacionComponent implements OnInit {
       });
     }
   }
-
-  
-  
-
 }
