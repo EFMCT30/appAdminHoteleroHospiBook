@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import { FrontlayaoutComponent } from './frontlayaout/frontlayaout.component';
 import { NavbarComponent } from './client/navbar/navbar.component';
 import { BannerComponent } from './client/banner/banner.component';
+import { ContactoemergenciaComponent } from './contactoemergencia/contactoemergencia.component';
 
 
 
@@ -35,7 +36,8 @@ import { BannerComponent } from './client/banner/banner.component';
     HotelComponent,
     FrontlayaoutComponent,
     NavbarComponent,
-    BannerComponent
+    BannerComponent,
+    ContactoemergenciaComponent
   ],
     imports: [
         BrowserModule,
