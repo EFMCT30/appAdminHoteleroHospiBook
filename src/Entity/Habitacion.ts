@@ -1,5 +1,6 @@
 export class Habitacion {
   constructor(
+
     public numeroHabitacion: number,
     public tipo: string,
     public capacidad: number,

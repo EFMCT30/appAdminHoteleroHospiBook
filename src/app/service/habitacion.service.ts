@@ -28,4 +28,24 @@ export class HabitacionService {
         });
     });
   }
+
+
+  public addHabitacion(token: string, newHabitacionData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .post(`${this.ruta}/habitaciones/create`, newHabitacionData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
 }
