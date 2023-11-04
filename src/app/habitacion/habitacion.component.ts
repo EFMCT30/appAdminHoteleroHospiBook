@@ -17,6 +17,7 @@ export class HabitacionComponent implements OnInit {
   habitaciones: Habitacion[] = [];
   token: string | null = null;
   newHabitacion: Habitacion = new Habitacion(0,0, "",0,0,false,new Date(), 0);
+  searchQuery: string = '';
 
   constructor(
     private habitacionService: HabitacionService,
@@ -127,6 +128,21 @@ export class HabitacionComponent implements OnInit {
           });
         }
       );
+    }
+  }
+
+  searchHabitacionesDisponibles() {
+    if (this.token) {
+      this.habitacionService
+        .getHabitacionesDisponibles(this.token, this.searchQuery)
+        .subscribe(
+          (habitaciones) => {
+            this.habitaciones = habitaciones;
+          },
+          (error) => {
+            console.error('Error fetching available habitaciones:', error);
+          }
+        );
     }
   }
   
