@@ -5,22 +5,28 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-6 col-md-8">
+            <div class="col-sm-6 col-md-6">
                 <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearModal">
                   <i class="fa-solid fa-plus"></i> Crear Nuevo
                 </button>
             </div>
-            <div class="col-sm-6 col-md-4 text-right">
-                <form>
-                    <div class="row">
-                        <div class="col-auto">
-                          <button class="btn btn-outline-warning" (click)="searchHabitacionesDisponibles()">
-                              <i class="fa-solid fa-magnifying-glass"></i> Listar Habitaciones disponibles
+            <div class="col-sm-6 col-md-6 text-right">
+              <form>
+                  <div class="row">
+                      <div class="col-auto">
+                          <button class="btn btn-outline-danger pl-5"  (click)="searchHabitacionesDisponibles()">
+                              <i class="fa-solid fa-magnifying-glass p-2"></i> Listar Habitación Disponibles
                           </button>
                       </div>
-                    </div>
-                </form>
-            </div>
+                      <p>comentario adad</p>
+                      <div class="col-auto">
+                          <button class="btn btn-outline-warning " (click)="ngOnInit()">
+                              <i class="fa-solid fa-magnifying-glass p-2"></i> Borrar Filtro
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>          
         </div>
     </div>
 
