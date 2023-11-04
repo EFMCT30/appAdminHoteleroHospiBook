@@ -18,6 +18,7 @@ import { FrontlayaoutComponent } from './frontlayaout/frontlayaout.component';
 import { NavbarComponent } from './client/navbar/navbar.component';
 import { BannerComponent } from './client/banner/banner.component';
 import { CuartosComponent } from './client/cuartos/cuartos.component';
+import { ContactoemergenciaComponent } from './contactoemergencia/contactoemergencia.component';
 
 
 
@@ -38,7 +39,8 @@ import { CuartosComponent } from './client/cuartos/cuartos.component';
     FrontlayaoutComponent,
     NavbarComponent,
     BannerComponent,
-    CuartosComponent
+    CuartosComponent,
+    ContactoemergenciaComponent
   ],
     imports: [
         BrowserModule,
