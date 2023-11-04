@@ -29,11 +29,7 @@ export class HabitacionService {
     });
   }
 
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 1404c3c0bff74744af0a9914ef49b021f8735561
   public addHabitacion(token: string, newHabitacionData: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
@@ -52,7 +48,6 @@ export class HabitacionService {
     });
   }
 
-<<<<<<< HEAD
   public deleteHabitacion(token: string, habitacionId: number): Observable<any> {
     return new Observable<any>((observer) => {
       axios
@@ -92,7 +87,4 @@ export class HabitacionService {
 
 
 
-  
-=======
->>>>>>> 1404c3c0bff74744af0a9914ef49b021f8735561
 }
