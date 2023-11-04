@@ -66,7 +66,7 @@ export class HabitacionService {
     });
   }
 
-  //actulizar
+  
   public updateHabitacion(token: string, habitacionId: number, updatedHabitacionData: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
@@ -85,6 +85,23 @@ export class HabitacionService {
     });
   }
 
+  public getHabitacionesDisponibles(token: string, query: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/habitaciones/disponibles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
 
 
 }
