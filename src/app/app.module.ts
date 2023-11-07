@@ -23,8 +23,6 @@ import { ContactoemergenciaComponent } from './contactoemergencia/contactoemerge
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +41,7 @@ import { ContactoemergenciaComponent } from './contactoemergencia/contactoemerge
     BannerComponent,
     CuartosComponent,
     ContactoemergenciaComponent,
-    UsercreateComponent
+    UsercreateComponent,
   ],
     imports: [
         BrowserModule,

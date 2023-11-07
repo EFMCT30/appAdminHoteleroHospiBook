@@ -3,7 +3,6 @@ import { User } from '../Entity/Usuario';
 export class Cliente {
   clienteId: number;
   nombre: string;
-  email: string;
   telefono: string;
   direccion: string;
   fechaRegistro: Date;
@@ -14,7 +13,6 @@ export class Cliente {
   constructor(
     clienteId: number,
     nombre: string,
-    email: string,
     telefono: string,
     direccion: string,
     fechaRegistro: Date,
@@ -24,7 +22,6 @@ export class Cliente {
   ) {
     this.clienteId = clienteId;
     this.nombre = nombre;
-    this.email = email;
     this.telefono = telefono;
     this.direccion = direccion;
     this.fechaRegistro = fechaRegistro;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
-import { ProfileserviceService } from '../service/profile.service';
+import { Profileservice } from '../service/profile.service';
 import { User } from '../../Entity/Usuario';
 import { Cliente } from '../../Entity/UsuarioCliente';
 import Swal from 'sweetalert2';
@@ -15,15 +15,16 @@ export class ProfileComponent implements OnInit {
 
   profile: any[] = [];
   token: string | null = null;
-  profileData: Cliente = new Cliente(0, '', '', '', '', new Date(), false, '', new User(0, '', '', '', []));
+  profileData: Cliente = new Cliente(0, '', '', '', new Date(), false, '', new User(0, '', '', '', []));
 
   constructor(
-    private axiosProfileservice: ProfileserviceService,
+    private axiosProfileservice: Profileservice,
     private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
+    console.log(this.token);
     if (this.token) {
       this.axiosProfileservice.getUserInfo(this.token).subscribe(
         (data) => {
@@ -52,6 +53,7 @@ export class ProfileComponent implements OnInit {
         },
         (error) => {
           console.error('Error al actualizar el cliente:', error);
+          console.log(error)
           let errorMessage = 'Hubo un problema al actualizar el cliente, por favor intenta de nuevo.';
           if (error.response && error.response.data) {
             errorMessage = error.response.data; // Asignar el mensaje de error del servidor

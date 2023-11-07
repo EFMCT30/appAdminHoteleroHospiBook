@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
-import { ProfileserviceService } from '../service/profile.service';
+import { Profileservice } from '../service/profile.service';
 import { User } from '../../Entity/Usuario';
 import Swal from 'sweetalert2';
 import { ClienteEmergencia } from 'src/Entity/UsuarioClienteEmergencia';
@@ -16,12 +16,12 @@ export class ContactoemergenciaComponent implements OnInit {
 
   profile: any[] = [];
   token: string | null = null;
-  profileDataEmergency: ClienteEmergencia = new ClienteEmergencia(0,"","","","","",new Cliente(0,"","","","",new Date,false,"",new User(0, '', '', '', [])));
+  profileDataEmergency: ClienteEmergencia = new ClienteEmergencia(0,"","","","","",new Cliente(0,"","","",new Date,false,"",new User(0, '', '', '', [])));
 
   constructor(
-    private axiosEmergencyservice: ProfileserviceService,
+    private axiosEmergencyservice: Profileservice,
     private tokenService: TokenService) {
-    
+
   }
   ngOnInit(): void {
     throw new Error('Method not implemented.');

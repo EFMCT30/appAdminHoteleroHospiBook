@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProfileService } from './profile.service';
+import { Profileservice } from "./profile.service";
 
 describe('ProfileService', () => {
-  let service: ProfileService;
+  let service: Profileservice;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProfileService);
+    service = TestBed.inject(Profileservice);
   });
 
   it('should be created', () => {
