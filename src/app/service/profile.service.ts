@@ -45,12 +45,31 @@ export class ProfileserviceService {
           observer.error(error);
         });
     });
-  }  
+  }
 
-  updateClientInfo(token: string, userId: number, clienteUpdateDTO: any): Observable<any> {
+  updateClientInfo(token: string, clienteUpdateDTO: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
-        .put(`${this.ruta}/updateClientInfo/${userId}`, clienteUpdateDTO, {
+        .put(`${this.ruta}/updateClientInfo`, clienteUpdateDTO, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+
+  getUserInfo(token: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/cliente/userInfo`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -84,7 +103,7 @@ export class ProfileserviceService {
         });
     });
   }
-  
+
 
 
 }

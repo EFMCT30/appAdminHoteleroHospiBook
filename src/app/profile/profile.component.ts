@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 
 export class ProfileComponent implements OnInit {
-  
+
   profile: any[] = [];
   token: string | null = null;
   profileData: Cliente = new Cliente(0, '', '', '', '', new Date(), false, '', new User(0, '', '', '', []));
@@ -25,11 +25,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
     if (this.token) {
-      const userId = 4; // Reemplaza con el ID del usuario que deseas obtener
-      this.axiosProfileservice.getUserInfoById(this.token, userId).subscribe(
+      this.axiosProfileservice.getUserInfo(this.token).subscribe(
         (data) => {
           this.profileData = data;
-          this.profileData.activo = this.profileData.activo;
         },
         (error) => {
           console.error('Error al obtener información del perfil del usuario:', error);
@@ -39,10 +37,10 @@ export class ProfileComponent implements OnInit {
       console.error('Token es nulo o inválido. No se puede obtener la información del perfil.');
     }
   }
-  
+
   updateClient() {
     if (this.token && this.profileData.clienteId !== 0) {
-      this.axiosProfileservice.updateClientInfo(this.token, this.profileData.clienteId, this.profileData).subscribe(
+      this.axiosProfileservice.updateClientInfo(this.token, this.profileData).subscribe(
         (response) => {
           console.log('Cliente actualizado:', response);
           Swal.fire({
@@ -67,5 +65,6 @@ export class ProfileComponent implements OnInit {
       );
     }
   }
+
 
 }
