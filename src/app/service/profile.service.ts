@@ -86,6 +86,24 @@ export class Profileservice {
 
 ////Información de emergencia dl cliente
 
+getUserInfoContact(token: string): Observable<any> {
+  return new Observable<any>((observer) => {
+    axios
+      .get(`${this.ruta}/cliente/userInfoContact`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error) => {
+        observer.error(error);
+      });
+  });
+}
+
   createClientEmergencyContact(token: string, clienteId: number, clienteEmergencyContactDTO: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios

@@ -24,7 +24,7 @@ export class ContactoemergenciaComponent implements OnInit {
     this.token = this.tokenService.getToken();
     console.log(this.token);
     if (this.token) {
-      this.axiosProfileservice.getUserInfo(this.token).subscribe(
+      this.axiosProfileservice.getUserInfoContact(this.token).subscribe(
         (data) => {
           this.populateClientEmergencyInfo(data); // Cambiar a la función correspondiente
         },

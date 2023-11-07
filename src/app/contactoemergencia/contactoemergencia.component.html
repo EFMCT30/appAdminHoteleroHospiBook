@@ -5,23 +5,23 @@
         <div class="row g-3">
             <div class="col-md-4">
                 <label for="contactName" class="form-label">Nombre de Contacto</label>
-                <input type="text" class="form-control" id="contactName" required>
+                <input type="text" class="form-control" id="contactName" disabled required [(ngModel)]="profileDataEmergency.contactName">
             </div>
             <div class="col-md-4">
                 <label for="contactPhone" class="form-label">Teléfono de Contacto</label>
-                <input type="text" class="form-control" id="contactPhone" required>
+                <input type="text" class="form-control" id="contactPhone" disabled required [(ngModel)]="profileDataEmergency.contactPhone">
             </div>
             <div class="col-md-4">
                 <label for="contactEmail" class="form-label">Correo de Contacto</label>
-                <input type="email" class="form-control" id="contactEmail" required>
+                <input type="email" class="form-control" id="contactEmail" disabled required [(ngModel)]="profileDataEmergency.contactEmail">
             </div>
             <div class="col-md-4">
                 <label for="relationship" class="form-label">Relación</label>
-                <input type="text" class="form-control" id="relationship" required>
+                <input type="text" class="form-control" id="relationship" disabled required [(ngModel)]="profileDataEmergency.relationship">
             </div>
             <div class="col-md-4">
                 <label for="address" class="form-label">Dirección de Contacto</label>
-                <input type="text" class="form-control" id="address" required>
+                <input type="text" class="form-control" id="address" disabled required [(ngModel)]="profileDataEmergency.address">
             </div>
          <form class="row g-3">
             <div class="col-12">
