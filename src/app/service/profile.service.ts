@@ -65,4 +65,26 @@ export class ProfileserviceService {
     });
   }
 
+////Información de emergencia dl cliente
+
+  createClientEmergencyContact(token: string, clienteId: number, clienteEmergencyContactDTO: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .post(`${this.ruta}/cliente/createClientEmergencyContact/${clienteId}`, clienteEmergencyContactDTO, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+  
+
+
 }
