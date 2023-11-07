@@ -2,7 +2,7 @@
     <h5 class="card-header">Contactos de Emergencia</h5>
     <div class="card-body">
         <!-- Formulario de contacto de emergencia -->
-        <form class="row g-3">
+        <div class="row g-3">
             <div class="col-md-4">
                 <label for="contactName" class="form-label">Nombre de Contacto</label>
                 <input type="text" class="form-control" id="contactName" required>
@@ -23,12 +23,64 @@
                 <label for="address" class="form-label">Dirección de Contacto</label>
                 <input type="text" class="form-control" id="address" required>
             </div>
+         <form class="row g-3">
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Guardar Contacto</button>
+                <button class="btn btn-primary mx-2" type="submit">Agregar Contacto</button>
+                <button type="button"  class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#crearModal">
+                  Crear Contacto
+                </button>
             </div>
-        </form>
+         </form>
+        </div>
     </div>
 </div>
+
+<!--<div class="modal fade" #exampleModal id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="crearModalLabel">Habitación</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3">
+            <div class="col-12">
+              <label for="txtCapacidad" class="form-label">Capacidad</label>
+              <input type="number" class="form-control" id="txtCapacidad" name="capacidad" required [(ngModel)]="newHabitacion.capacidad">
+            </div>
+            <div class="col-12">
+              <label for="toggleDisponible" class="form-label">Disponible</label>
+              <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
+            </div>            
+            <div class="col-12">
+              <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
+              <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+            </div>
+            <div class="col-12">
+              <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
+              <input type="number" class="form-control" id="txtNumeroHabitaciones" name="numeroHabitacion required" [(ngModel)]="newHabitacion.numeroHabitacion">
+            </div>
+            <div class="col-12">
+              <label for="txtPrecioNoche" class="form-label">Precio por Noche</label>
+              <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
+            </div>
+            <div class="col-12">
+              <label for="txtTipo" class="form-label">Tipo</label>
+              <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+            </div>
+            <div class="col-12">
+              <label for="txtHotelid" class="form-label">HotelId</label>
+              <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="addNewHabitacion()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>-->
 
 
 
