@@ -18,7 +18,7 @@
                               <i class="fa-solid fa-magnifying-glass p-2"></i> Listar Habitación Disponibles
                           </button>
                       </div>
-                      
+
                       <div class="col-auto">
                           <button class="btn btn-outline-warning " (click)="ngOnInit()">
                               <i class="fa-solid fa-magnifying-glass p-2"></i> Borrar Filtro
@@ -26,7 +26,7 @@
                       </div>
                   </div>
               </form>
-          </div>          
+          </div>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
         <td>
           <button data-bs-toggle="modal" data-bs-target="#updateHabitacionModal" (click)="openUpdateModal(habitacionItem)"
                         class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
-                 
+
           <button (click)="deleteHabitacion(habitacionItem.habitacionId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
         </td>
       </tr>
@@ -84,7 +84,7 @@
           <div class="col-12">
             <label for="toggleDisponible" class="form-label">Disponible</label>
             <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
-          </div>            
+          </div>
           <div class="col-12">
             <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
             <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
@@ -132,7 +132,7 @@
           <div class="col-12">
             <label for="toggleDisponible" class="form-label">Disponible</label>
             <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
-          </div>            
+          </div>
           <div class="col-12">
             <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
             <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">

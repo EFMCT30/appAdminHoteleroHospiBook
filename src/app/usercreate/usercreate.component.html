@@ -1,0 +1,32 @@
+<div class="card">
+  <h5 class="card-header">User Registration</h5>
+  <div class="card-body">
+    <form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="validationDefaultName" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="validationDefaultName" formControlName="name" required>
+        </div>
+        <div class="col-md-4">
+          <label for="validationDefaultCorreo" class="form-label">Correo</label>
+          <input type="email" class="form-control" id="validationDefaultCorreo" formControlName="email" required>
+        </div>
+        <div class="col-md-4">
+          <label for="validationDefaultPassword" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="validationDefaultPassword" formControlName="password" required>
+        </div>
+        <!-- Add a Role field with a select dropdown -->
+        <div class="col-md-4">
+          <label for="validationDefaultRole" class="form-label">Rol</label>
+          <select class="form-select" id="validationDefaultRole" formControlName="role" required>
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+            <option value="GUEST">GUEST</option>
+          </select>
+        </div>
+        <!-- Add more form controls as needed -->
+      </div>
+      <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+  </div>
+</div>
