@@ -40,6 +40,40 @@ export class ProfileComponent implements OnInit {
   }
 
   updateClient() {
+    const camposVacios: string[] = [];
+    const camposInvalidos: string[] = [];
+  
+    // Verifica si algún campo obligatorio está vacío o contiene solo espacios en blanco
+    if (!this.profileData.nombre) {
+      camposVacios.push('Nombre');
+    }
+    if (!this.profileData.telefono) {
+      camposVacios.push('Teléfono');
+    } else if (!/^\d{9}$/.test(this.profileData.telefono)) {
+      camposInvalidos.push('Teléfono (debe tener 9 dígitos)');
+    }
+    if (!this.profileData.direccion) {
+      camposVacios.push('Dirección');
+    }
+  
+    if (camposVacios.length > 0 || camposInvalidos.length > 0) {
+      let mensajeError = '';
+      if (camposVacios.length > 0) {
+        mensajeError += `Los siguientes campos son obligatorios y deben completarse: ${camposVacios.join(', ')}. `;
+      }
+      if (camposInvalidos.length > 0) {
+        mensajeError += `Los siguientes campos tienen formato inválido: ${camposInvalidos.join(', ')}.`;
+      }
+  
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos inválidos u obligatorios',
+        text: mensajeError,
+      });
+  
+      return;
+    }
+  
     if (this.token && this.profileData.clienteId !== 0) {
       this.axiosProfileservice.updateClientInfo(this.token, this.profileData).subscribe(
         (response) => {
@@ -53,20 +87,20 @@ export class ProfileComponent implements OnInit {
         },
         (error) => {
           console.error('Error al actualizar el cliente:', error);
-          console.log(error)
-          let errorMessage = 'Hubo un problema al actualizar el cliente, por favor intenta de nuevo.';
+          console.log(error);
+          let mensajeError = 'Hubo un problema al actualizar el cliente, por favor intenta de nuevo.';
           if (error.response && error.response.data) {
-            errorMessage = error.response.data; // Asignar el mensaje de error del servidor
+            mensajeError = error.response.data; // Asignar el mensaje de error del servidor
           }
           Swal.fire({
             icon: 'error',
             title: 'Error al actualizar el cliente',
-            text: errorMessage,
+            text: mensajeError,
           });
         }
       );
     }
   }
-
-
+  
+  
 }

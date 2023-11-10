@@ -20,32 +20,28 @@
                     </div>
                     <div class="col-md-4">
                         <label for="txtNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="txtNombre" name="nombre" aria-describedby="inputGroupPrepend2" required [(ngModel)]="profileData.nombre">
+                        <input type="text" class="form-control" id="txtNombre" name="nombre" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.nombre">
                     </div>
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="txtCorreo" class="form-label">Correo</label>-->
-<!--                        <input type="email" class="form-control" id="txtCorreo" name="correo" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.email">-->
-<!--                    </div>-->
                     <div class="col-md-4">
                         <label for="txtTelefono" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="txtTelefono" name="telefono" aria-describedby="inputGroupPrepend2" required [(ngModel)]="profileData.telefono">
+                        <input type="text" class="form-control" id="txtTelefono" name="telefono" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.telefono">
                     </div>
                     <div class="col-md-4">
                         <label for="txtDireccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="txtDireccion" name="direccion" aria-describedby="inputGroupPrepend2" required [(ngModel)]="profileData.direccion">
+                        <input type="text" class="form-control" id="txtDireccion" name="direccion" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.direccion">
                     </div>
                     <div class="col-md-4">
                         <label for="txtFecRegistro" class="form-label">Fecha de Registro</label>
-                        <input type="text" class="form-control" id="txtFecRegistro" name="fecregistro" aria-describedby="inputGroupPrepend2" required [(ngModel)]="profileData.fechaRegistro">
+                        <input type="text" class="form-control" id="txtFecRegistro" name="fecregistro" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.fechaRegistro">
                     </div>
                     <div class="col-md-8">
                         <label for="txtPreferencias" class="form-label">Preferencias</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="txtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="txtPreferencias" name="preferecnias" style="height: 100px" disabled [(ngModel)]="profileData.preferencias"></textarea>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [(ngModel)]="profileData.activo" name="activo">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" disabled [(ngModel)]="profileData.activo" name="activo">
                                 <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
                             </div>
                         </div>
@@ -53,11 +49,6 @@
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateprofileDataModal">
                     Editar Perfil
                   </button>
-
-
-                  <div class="col-12">
-                        <button class="btn btn-primary" type="submit" (click)="updateClient()">Actualizar</button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -85,10 +76,6 @@
             <label for="updateTxtNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="profileData.nombre">
           </div>
-<!--          <div class="col-12">-->
-<!--            <label for="updateTxtCorreo" class="form-label">Correo</label>-->
-<!--            <input type="email" class="form-control" id="updateTxtCorreo" name="correo" required [(ngModel)]="profileData.email">-->
-<!--          </div>-->
           <div class="col-12">
             <label for="updateTxtTelefono" class="form-label">Telefono</label>
             <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="profileData.telefono">
@@ -97,13 +84,13 @@
             <label for="updateTxtDireccion" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="profileData.direccion">
           </div>
-          <div class="col-12">
+          <!--<div class="col-12">
             <label for="updateTxtFecRegistro" class="form-label">Fecha de Registro</label>
             <input type="text" class="form-control" id="updateTxtFecRegistro" name="fecregistro" required [(ngModel)]="profileData.fechaRegistro">
-          </div>
+          </div>-->
           <div class="col-12">
             <label for="updateTxtPreferencias" class="form-label">Preferencias</label>
-            <textarea class="form-control" placeholder="Leave a comment here" id="updateTxtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
+            <textarea class="form-control" placeholder="Este campo es opcional." id="updateTxtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
           </div>
           <div class="col-12">
             <div class="input-group">
@@ -117,7 +104,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="updateClient()" data-bs-dismiss="modal">Actualizar</button>
+        <button type="button" class="btn btn-primary" (click)="updateClient()">Actualizar</button>
       </div>
     </div>
   </div>

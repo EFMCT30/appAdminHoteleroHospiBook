@@ -47,6 +47,24 @@ export class Profileservice {
   //   });
   // }
 
+  getUserInfo(token: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/cliente/userInfo`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
   updateClientInfo(token: string, clienteUpdateDTO: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
@@ -66,44 +84,44 @@ export class Profileservice {
   }
 
 
-  getUserInfo(token: string): Observable<any> {
-    return new Observable<any>((observer) => {
-      axios
-        .get(`${this.ruta}/cliente/userInfo`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          observer.next(response.data);
-          observer.complete();
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
-  }
-
 ////Información de emergencia dl cliente
 
-  createClientEmergencyContact(token: string, clienteId: number, clienteEmergencyContactDTO: any): Observable<any> {
-    return new Observable<any>((observer) => {
-      axios
-        .post(`${this.ruta}/cliente/createClientEmergencyContact/${clienteId}`, clienteEmergencyContactDTO, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          observer.next(response.data);
-          observer.complete();
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
-  }
+getUserInfoContact(token: string): Observable<any> {
+  return new Observable<any>((observer) => {
+    axios
+      .get(`${this.ruta}/cliente/userInfoContact`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error) => {
+        observer.error(error);
+      });
+  });
+}
 
+updateEmergencyInfo(token: string, clienteUpdateDTO: any): Observable<any> {
+  return new Observable<any>((observer) => {
+    axios
+      .put(`${this.ruta}/cliente/updateEmergencyContact`, clienteUpdateDTO, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud HTTP:', error);
+        observer.error(error);
+      });
+  });
+}
 
 
 }

@@ -1,33 +1,32 @@
-<div class="card">
+<div class="card" style="margin-bottom: 20px;">
     <h5 class="card-header">Contactos de Emergencia</h5>
     <div class="card-body">
         <!-- Formulario de contacto de emergencia -->
         <div class="row g-3">
             <div class="col-md-4">
                 <label for="contactName" class="form-label">Nombre de Contacto</label>
-                <input type="text" class="form-control" id="contactName" required>
+                <input type="text" class="form-control" id="contactName" disabled required [(ngModel)]="profileDataEmergency.contactName">
             </div>
             <div class="col-md-4">
                 <label for="contactPhone" class="form-label">Teléfono de Contacto</label>
-                <input type="text" class="form-control" id="contactPhone" required>
+                <input type="text" class="form-control" id="contactPhone" disabled required [(ngModel)]="profileDataEmergency.contactPhone">
             </div>
             <div class="col-md-4">
                 <label for="contactEmail" class="form-label">Correo de Contacto</label>
-                <input type="email" class="form-control" id="contactEmail" required>
+                <input type="email" class="form-control" id="contactEmail" disabled required [(ngModel)]="profileDataEmergency.contactEmail">
             </div>
             <div class="col-md-4">
                 <label for="relationship" class="form-label">Relación</label>
-                <input type="text" class="form-control" id="relationship" required>
+                <input type="text" class="form-control" id="relationship" disabled required [(ngModel)]="profileDataEmergency.relationship">
             </div>
             <div class="col-md-4">
                 <label for="address" class="form-label">Dirección de Contacto</label>
-                <input type="text" class="form-control" id="address" required>
+                <input type="text" class="form-control" id="address" disabled required [(ngModel)]="profileDataEmergency.address">
             </div>
          <form class="row g-3">
             <div class="col-12">
-                <button class="btn btn-primary mx-2" type="submit">Agregar Contacto</button>
                 <button type="button"  class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#crearModal">
-                  Crear Contacto
+                  Actualizar Contacto
                 </button>
             </div>
          </form>
@@ -35,52 +34,44 @@
     </div>
 </div>
 
-<!--<div class="modal fade" #exampleModal id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+<div class="modal fade" #exampleModal id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="crearModalLabel">Habitación</h1>
+          <h1 class="modal-title fs-5" id="crearModalLabel">Contacto de Emergencia</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form class="row g-3">
             <div class="col-12">
-              <label for="txtCapacidad" class="form-label">Capacidad</label>
-              <input type="number" class="form-control" id="txtCapacidad" name="capacidad" required [(ngModel)]="newHabitacion.capacidad">
+              <label for="txtCapacidad" class="form-label">Nombre de Contacto</label>
+              <input type="text" class="form-control" id="txtnomcontact" name="nombre" required [(ngModel)]="profileDataEmergency.contactName">
             </div>
             <div class="col-12">
-              <label for="toggleDisponible" class="form-label">Disponible</label>
-              <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
+              <label for="txttelcontact" class="form-label">Teléfono de Contacto</label>
+              <input type="text" class="form-control" id="txttelcontact" name="telefono" required [(ngModel)]="profileDataEmergency.contactPhone">
             </div>            
             <div class="col-12">
-              <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
-              <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+              <label for="txtemail" class="form-label">Correo de Contacto</label>
+              <input type="email" class="form-control" id="txtemail" name="txtemail" required [(ngModel)]="profileDataEmergency.contactEmail">
             </div>
             <div class="col-12">
-              <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
-              <input type="number" class="form-control" id="txtNumeroHabitaciones" name="numeroHabitacion required" [(ngModel)]="newHabitacion.numeroHabitacion">
+              <label for="txtrela" class="form-label">Relación</label>
+              <input type="text" class="form-control" id="txtrela" name="txtrela" required [(ngModel)]="profileDataEmergency.relationship">
             </div>
             <div class="col-12">
-              <label for="txtPrecioNoche" class="form-label">Precio por Noche</label>
-              <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
-            </div>
-            <div class="col-12">
-              <label for="txtTipo" class="form-label">Tipo</label>
-              <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
-            </div>
-            <div class="col-12">
-              <label for="txtHotelid" class="form-label">HotelId</label>
-              <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
+              <label for="txtdirec" class="form-label">Dirección de Contacto</label>
+              <input type="text" class="form-control" id="txtdirec" name="txtdirec" required [(ngModel)]="profileDataEmergency.address">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="addNewHabitacion()">Guardar</button>
+          <button type="button" class="btn btn-primary" (click)="updateEmergency()">Guardar</button>
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
 
 
 
