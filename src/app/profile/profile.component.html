@@ -22,10 +22,6 @@
                         <label for="txtNombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="txtNombre" name="nombre" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.nombre">
                     </div>
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="txtCorreo" class="form-label">Correo</label>-->
-<!--                        <input type="email" class="form-control" id="txtCorreo" name="correo" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.email">-->
-<!--                    </div>-->
                     <div class="col-md-4">
                         <label for="txtTelefono" class="form-label">Telefono</label>
                         <input type="text" class="form-control" id="txtTelefono" name="telefono" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.telefono">
@@ -80,10 +76,6 @@
             <label for="updateTxtNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="profileData.nombre">
           </div>
-<!--          <div class="col-12">-->
-<!--            <label for="updateTxtCorreo" class="form-label">Correo</label>-->
-<!--            <input type="email" class="form-control" id="updateTxtCorreo" name="correo" required [(ngModel)]="profileData.email">-->
-<!--          </div>-->
           <div class="col-12">
             <label for="updateTxtTelefono" class="form-label">Telefono</label>
             <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="profileData.telefono">
@@ -92,13 +84,13 @@
             <label for="updateTxtDireccion" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="profileData.direccion">
           </div>
-          <div class="col-12">
+          <!--<div class="col-12">
             <label for="updateTxtFecRegistro" class="form-label">Fecha de Registro</label>
             <input type="text" class="form-control" id="updateTxtFecRegistro" name="fecregistro" required [(ngModel)]="profileData.fechaRegistro">
-          </div>
+          </div>-->
           <div class="col-12">
             <label for="updateTxtPreferencias" class="form-label">Preferencias</label>
-            <textarea class="form-control" placeholder="Leave a comment here" id="updateTxtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
+            <textarea class="form-control" placeholder="Este campo es opcional." id="updateTxtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
           </div>
           <div class="col-12">
             <div class="input-group">
@@ -112,7 +104,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="updateClient()" data-bs-dismiss="modal">Actualizar</button>
+        <button type="button" class="btn btn-primary" (click)="updateClient()">Actualizar</button>
       </div>
     </div>
   </div>
