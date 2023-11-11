@@ -20,6 +20,7 @@ import { BannerComponent } from './client/banner/banner.component';
 import { UsercreateComponent} from "./usercreate/usercreate.component";
 import { CuartosComponent } from './client/cuartos/cuartos.component';
 import { ContactoemergenciaComponent } from './contactoemergencia/contactoemergencia.component';
+import { FooterComponent } from './client/footer/footer.component';
 
 
 
@@ -42,6 +43,7 @@ import { ContactoemergenciaComponent } from './contactoemergencia/contactoemerge
     CuartosComponent,
     ContactoemergenciaComponent,
     UsercreateComponent,
+    FooterComponent,
   ],
     imports: [
         BrowserModule,
