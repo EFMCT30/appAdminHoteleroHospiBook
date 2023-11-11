@@ -23,6 +23,12 @@
   <app-hotel></app-hotel>
 </ng-template>
 
+<ng-container *ngIf="isCreateUserRoute; then usercreateBlock"></ng-container>
+<ng-template #usercreateBlock>
+  <app-usercreate></app-usercreate>
+</ng-template>
+
+
 <!-- <ng-container *ngIf="isProfileRoute; then profileBlock"></ng-container>
 <ng-container *ngIf="isDashboardRoute; then dashboardBlock"></ng-container>
 <ng-container *ngIf="isReservaRoute; then reservaBlock"></ng-container>

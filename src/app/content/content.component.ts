@@ -13,6 +13,7 @@ export class ContentComponent {
   isHabitacionRoute: boolean=false;
   isReservaRoute: boolean=false;
   isHotelRoute: boolean=false;
+  isCreateUserRoute: boolean=false;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -21,5 +22,6 @@ export class ContentComponent {
     this.isReservaRoute = this.route.snapshot.routeConfig?.path === 'reserva';
     this.isHabitacionRoute = this.route.snapshot.routeConfig?.path === 'habitacion';
     this.isHotelRoute = this.route.snapshot.routeConfig?.path === 'hotel';
+    this.isCreateUserRoute =this.route.snapshot.routeConfig?.path === 'usercreate';
   }
 }

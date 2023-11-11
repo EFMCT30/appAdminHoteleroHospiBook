@@ -61,7 +61,7 @@ export class HotelComponent implements OnInit {
           console.log('Nuevo hotel registrado:', response);
           this.hotel.push(response);
           this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
-  
+
           Swal.fire({
             icon: 'success',
             title: '¡Hotel añadido!',
@@ -119,7 +119,6 @@ export class HotelComponent implements OnInit {
 
   openUpdateModal(hotel: Hotel) {
     this.newHotel = { ...hotel };
-    console.log('Hotel seleccionado para actualización:', this.newHotel);
   }
 
   updateHotel() {
@@ -127,10 +126,10 @@ export class HotelComponent implements OnInit {
       this.axiosHotelService.updateHotel(this.token, this.newHotel.hotelId, this.newHotel).subscribe(
         (response) => {
           console.log('Hotel actualizado:', response);
-  
+
           // Busca el índice del hotel actualizado en this.hotel
           const index = this.hotel.findIndex(h => h.hotelId === this.newHotel.hotelId);
-  
+
           if (index !== -1) {
             // Actualiza el hotel en this.hotel con los datos del servidor
             this.hotel[index] = response;

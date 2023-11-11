@@ -13,10 +13,13 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HabitacionComponent } from './habitacion/habitacion.component';
 import { HotelComponent } from './hotel/hotel.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FrontlayaoutComponent } from './frontlayaout/frontlayaout.component';
 import { NavbarComponent } from './client/navbar/navbar.component';
 import { BannerComponent } from './client/banner/banner.component';
+import { UsercreateComponent} from "./usercreate/usercreate.component";
+import { CuartosComponent } from './client/cuartos/cuartos.component';
+import { ContactoemergenciaComponent } from './contactoemergencia/contactoemergencia.component';
 
 
 
@@ -35,12 +38,16 @@ import { BannerComponent } from './client/banner/banner.component';
     HotelComponent,
     FrontlayaoutComponent,
     NavbarComponent,
-    BannerComponent
+    BannerComponent,
+    CuartosComponent,
+    ContactoemergenciaComponent,
+    UsercreateComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

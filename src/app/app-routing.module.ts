@@ -38,6 +38,11 @@ const routes: Routes = [
         component: LayoutComponent,
         data: { title: 'Hotel' },
       },
+      {
+        path: 'usercreate',
+        component: LayoutComponent,
+        data: { title: 'Crear Usuario' },
+      },
       // Add other routes as needed
     ],
   },

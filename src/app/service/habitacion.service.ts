@@ -11,14 +11,14 @@ export class HabitacionService {
 
   constructor() {}
 
-  public getHabitaciones(token: string): Observable<Habitacion[]> {
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    return new Observable<Habitacion[]>((observer) => {
+  public getHabitacion(token: string): Observable<any> {
+    return new Observable<any>((observer) => {
       axios
-        .get<Habitacion[]>(`${this.ruta}/habitaciones`, { headers })
+        .get(`${this.ruta}/habitaciones`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           observer.next(response.data);
           observer.complete();
@@ -28,4 +28,80 @@ export class HabitacionService {
         });
     });
   }
+
+  
+  public addHabitacion(token: string, newHabitacionData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .post(`${this.ruta}/habitaciones/create`, newHabitacionData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  public deleteHabitacion(token: string, habitacionId: number): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .delete(`${this.ruta}/habitaciones/${habitacionId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  
+  public updateHabitacion(token: string, habitacionId: number, updatedHabitacionData: any): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .put(`${this.ruta}/habitaciones/${habitacionId}`, updatedHabitacionData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  public getHabitacionesDisponibles(token: string, query: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/habitaciones/disponibles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+
 }

@@ -1,114 +1,160 @@
 <div class="card table-responsive">
+
     <div class="card-header">
         <h3>Lista de Habitaciones</h3>
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-6 col-md-8">
-                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="col-sm-6 col-md-6">
+                <button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearModal">
                   <i class="fa-solid fa-plus"></i> Crear Nuevo
                 </button>
             </div>
-            <div class="col-sm-6 col-md-4 text-right">
-                <form>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control" >
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-outline-warning"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <div class="col-sm-6 col-md-6 text-right">
+              <form>
+                  <div class="row">
+                      <div class="col-auto">
+                          <button class="btn btn-outline-danger pl-5"  (click)="searchHabitacionesDisponibles()">
+                              <i class="fa-solid fa-magnifying-glass p-2"></i> Listar Habitación Disponibles
+                          </button>
+                      </div>
+
+                      <div class="col-auto">
+                          <button class="btn btn-outline-warning " (click)="ngOnInit()">
+                              <i class="fa-solid fa-magnifying-glass p-2"></i> Borrar Filtro
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>
         </div>
     </div>
 
-    <table id="tablaHabitacion" class="table table-bordered table-hover table-striped">
-        <thead>
-            <tr>
-              <th>Habitacion ID</th>
-              <th>Capacidad</th>
-              <th>Disponible</th>
-              <th>Fecha Ultima de Mantenimiento</th>
-              <th>Nro Habitación</th>
-              <th>Precio de la noche</th>
-              <th>Tipo</th>
-              <th>Hotel</th>
-              <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let habitacion of habitaciones">
-          <td>{{ habitacion.habitacionId}}</td>
-          <td>{{ habitacion.capacidad }}</td>
-          <td>{{ habitacion.disponible ? 'Sí' : 'No' }}</td>
-          <td>{{ habitacion.fechaUltimaMantenimiento }}</td>
-          <td>{{ habitacion.numeroHabitacion }}</td>
-          <td>{{ habitacion.precioNoche | currency: 'USD' }}</td>
-          <td>{{ habitacion.tipo }}</td>
-          <td>{{ habitacion.hotelId }}</td>
-          <td>
-            <a class="btn btn-outline-primary" ><i class="fa-solid fa-pen-to-square"></i> Editar</a> |
-            <a class="btn btn-outline-danger" ><i class="fa-solid fa-trash"></i> Eliminar</a>
-          </td>
-        </tr>
-        </tbody>
-    </table>
+
+  <table id="tablaHabitacion" class="table table-bordered table-hover table-striped">
+      <thead>
+          <tr>
+            <th>Habitacion ID</th>
+            <th>Capacidad</th>
+            <th>Disponible</th>
+            <th>Fecha Ultima de Mantenimiento</th>
+            <th>Nro Habitación</th>
+            <th>Precio de la noche</th>
+            <th>Tipo</th>
+            <th>Hotel</th>
+            <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habitacionItem of habitaciones ">
+        <td>{{ habitacionItem.habitacionId}}</td>
+        <td>{{ habitacionItem.capacidad }}</td>
+        <td>{{ habitacionItem.disponible ? 'Sí' : 'No' }}</td>
+        <td>{{ habitacionItem.fechaUltimaMantenimiento }}</td>
+        <td>{{ habitacionItem.numeroHabitacion }}</td>
+        <td>{{ habitacionItem.precioNoche | currency: 'USD' }}</td>
+        <td>{{ habitacionItem.tipo }}</td>
+        <td>{{ habitacionItem.hotelId }}</td>
+        <td>
+          <button data-bs-toggle="modal" data-bs-target="#updateHabitacionModal" (click)="openUpdateModal(habitacionItem)"
+                        class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
+
+          <button (click)="deleteHabitacion(habitacionItem.habitacionId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
+        </td>
+      </tr>
+      </tbody>
+  </table>
 </div>
 
+<!--Crear-->
 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h1 class="modal-title fs-5" id="exampleModalLabel">Habitación</h1>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <div class="row">-->
-<!--          <div class="col-md-6">-->
-<!--            <form class="row g-3">-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultCapacidad" class="form-label">Capacidad</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultCapacidad" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultDisponible" class="form-label">Disponible</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultDisponible" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultFechaUltimaMantiemiento" class="form-label">Fecha ultima de mantenimiento</label>-->
-<!--                <input type="date" class="form-control" id="validationDefaultFechaUltimaMantiemiento" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultNumeroHabitacion" class="form-label">Número de Habitación</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultNumeroHabitacion" required>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--          <div class="col-md-6">-->
-<!--            <form class="row g-3">-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultPrecioNoche" class="form-label">Precio de la Noche</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultPrecioNoche" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultTipo" class="form-label">Tipo</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultTipo" required>-->
-<!--              </div>-->
-<!--              <div class="col-12">-->
-<!--                <label for="validationDefaultHotel" class="form-label">Dirección</label>-->
-<!--                <input type="text" class="form-control" id="validationDefaultDireccion" required>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>-->
-<!--        <button type="button" class="btn btn-primary">Guardar</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="modal fade" #exampleModal id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="crearModalLabel">Habitación</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <div class="col-12">
+            <label for="txtCapacidad" class="form-label">Capacidad</label>
+            <input type="number" class="form-control" id="txtCapacidad" name="capacidad" required [(ngModel)]="newHabitacion.capacidad">
+          </div>
+          <div class="col-12">
+            <label for="toggleDisponible" class="form-label">Disponible</label>
+            <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
+          </div>
+          <div class="col-12">
+            <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+          </div>
+          <div class="col-12">
+            <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
+            <input type="number" class="form-control" id="txtNumeroHabitaciones" name="numeroHabitacion required" [(ngModel)]="newHabitacion.numeroHabitacion">
+          </div>
+          <div class="col-12">
+            <label for="txtPrecioNoche" class="form-label">Precio por Noche</label>
+            <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
+          </div>
+          <div class="col-12">
+            <label for="txtTipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+          </div>
+          <div class="col-12">
+            <label for="txtHotelid" class="form-label">HotelId</label>
+            <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="addNewHabitacion()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Actualizar-->
+<div class="modal fade" #exampleModal id="updateHabitacionModal" tabindex="-1" aria-labelledby="updateHabitacionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateHabitacionModalLabel">Habitación</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <div class="col-12">
+            <label for="txtCapacidad" class="form-label">Capacidad</label>
+            <input type="number" class="form-control" id="txtCapacidad" name="capacidad" required [(ngModel)]="newHabitacion.capacidad">
+          </div>
+          <div class="col-12">
+            <label for="toggleDisponible" class="form-label">Disponible</label>
+            <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
+          </div>
+          <div class="col-12">
+            <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
+            <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+          </div>
+          <div class="col-12">
+            <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
+            <input type="number" class="form-control" id="txtNumeroHabitaciones" name="numeroHabitacion required" [(ngModel)]="newHabitacion.numeroHabitacion">
+          </div>
+          <div class="col-12">
+            <label for="txtPrecioNoche" class="form-label">Precio por Noche</label>
+            <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
+          </div>
+          <div class="col-12">
+            <label for="txtTipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="updateHabitacion()" data-bs-dismiss="modal">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
