@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HabitacionService } from '../service/habitacion.service';
 import { TokenService } from '../service/token.service';
 import Swal from 'sweetalert2';
-
-
-
-
 import { Habitacion } from 'src/Entity/Habitacion';
 
 @Component({
@@ -16,8 +12,20 @@ import { Habitacion } from 'src/Entity/Habitacion';
 export class HabitacionComponent implements OnInit {
   habitaciones: Habitacion[] = [];
   token: string | null = null;
-  newHabitacion: Habitacion = new Habitacion(0,0, "",0,0,false,new Date(), 0);
+  newHabitacion: Habitacion = new Habitacion(
+    0,
+    0,
+    '',
+    0,
+    0,
+    false,
+    new Date(),
+    0,
+    'uploads/images/empty-room.jpg'
+  );
   searchQuery: string = '';
+  @ViewChild('fileInput', { static: false }) fileInput: ElementRef =
+    new ElementRef('fileInput');
 
   constructor(
     private habitacionService: HabitacionService,
@@ -41,30 +49,72 @@ export class HabitacionComponent implements OnInit {
 
   addNewHabitacion() {
     console.log(JSON.stringify(this.newHabitacion));
+    const file: File = this.fileInput.nativeElement.files[0];
     if (this.token) {
-      this.habitacionService.addHabitacion(this.token, this.newHabitacion).subscribe(
-        (response) => {
-          console.log('Nueva habitación registrada:', response);
-          this.habitaciones.push(response);
-          this.newHabitacion = new Habitacion(0,0, "",0,0,false,new Date(), 0);
-            
-          Swal.fire({
-            icon: 'success',
-            title: '¡Habitación añadida!',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        },
-        (error) => {
-          console.error('Error al registrar la nueva habitación:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al añadir la habitación',
-            text: 'Hubo un problema al registrar la habitación, por favor intenta de nuevo.',
-          });
-        }
-      );
+      this.habitacionService
+        .addHabitacion(this.token, this.newHabitacion)
+        .subscribe(
+          (response) => {
+            console.log('Nueva habitación registrada:', response);
+            if (file) {
+              this.updatePhotoHabitacion(file, response);
+            } else {
+              this.actualizarTablaHabitaciones(response);
+            }
+          },
+          (error) => {
+            console.error('Error al registrar la nueva habitación:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al añadir la habitación',
+              text: 'Hubo un problema al registrar la habitación, por favor intenta de nuevo.',
+            });
+          }
+        );
     }
+  }
+
+  updatePhotoHabitacion(file: File, responseHabitacion: any) {
+    console.log(responseHabitacion);
+    if (this.token) {
+      this.habitacionService
+        .subirFoto(this.token, responseHabitacion.habitacionId, file)
+        .subscribe(
+          (response) => {
+            this.actualizarTablaHabitaciones(response);
+          },
+          (error) => {
+            console.error('Error al subir foto de la nueva habitación:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al añadir la foto de habitación',
+              text: 'Hubo un problema al registrar la foto de la habitación, por favor intenta de nuevo.',
+            });
+          }
+        );
+    }
+  }
+
+  actualizarTablaHabitaciones(response: any){
+    this.habitaciones.push(response);
+    this.newHabitacion = new Habitacion(
+      0,
+      0,
+      '',
+      0,
+      0,
+      false,
+      new Date(),
+      0,
+      ''
+    );
+
+    Swal.fire({
+      icon: 'success',
+      title: '¡Habitación añadida!',
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   deleteHabitacion(habitacionId: number) {
@@ -80,15 +130,19 @@ export class HabitacionComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           if (this.token !== null) {
-            this.habitacionService.deleteHabitacion(this.token, habitacionId).subscribe(
-              (response) => {
-                console.log('Habitación eliminada ID:', habitacionId);
-                this.habitaciones = this.habitaciones.filter((h) => h.habitacionId !== habitacionId);
-              },
-              (error) => {
-                console.error('Error al eliminar la habitación:', error);
-              }
-            );
+            this.habitacionService
+              .deleteHabitacion(this.token, habitacionId)
+              .subscribe(
+                (response) => {
+                  console.log('Habitación eliminada ID:', habitacionId);
+                  this.habitaciones = this.habitaciones.filter(
+                    (h) => h.habitacionId !== habitacionId
+                  );
+                },
+                (error) => {
+                  console.error('Error al eliminar la habitación:', error);
+                }
+              );
           }
         }
       });
@@ -97,37 +151,47 @@ export class HabitacionComponent implements OnInit {
 
   openUpdateModal(habitacion: Habitacion) {
     this.newHabitacion = { ...habitacion };
-    console.log('Habitación seleccionado para actualización:', this.newHabitacion);
+    console.log(
+      'Habitación seleccionado para actualización:',
+      this.newHabitacion
+    );
   }
 
   updateHabitacion() {
     if (this.token && this.newHabitacion.hotelId !== 0) {
-      this.habitacionService.updateHabitacion(this.token, this.newHabitacion.habitacionId, this.newHabitacion).subscribe(
-        (response) => {
-          console.log('Habitación actualizado:', response);
-          
-         const index = this.habitaciones.findIndex(h => h.habitacionId === this.newHabitacion.habitacionId);
-  
-          if (index !== -1) {
+      this.habitacionService
+        .updateHabitacion(
+          this.token,
+          this.newHabitacion.habitacionId,
+          this.newHabitacion
+        )
+        .subscribe(
+          (response) => {
+            console.log('Habitación actualizado:', response);
 
-            this.habitaciones[index] = response;
+            const index = this.habitaciones.findIndex(
+              (h) => h.habitacionId === this.newHabitacion.habitacionId
+            );
+
+            if (index !== -1) {
+              this.habitaciones[index] = response;
+            }
+            Swal.fire({
+              icon: 'success',
+              title: '¡Habitación actualizada!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+          (error) => {
+            console.error('Error al actualizar la habitación:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al actualizar la habitación',
+              text: 'Hubo un problema al actualizar la habitación, por favor intenta de nuevo.',
+            });
           }
-          Swal.fire({
-            icon: 'success',
-            title: '¡Habitación actualizada!',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        },
-        (error) => {
-          console.error('Error al actualizar la habitación:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al actualizar la habitación',
-            text: 'Hubo un problema al actualizar la habitación, por favor intenta de nuevo.',
-          });
-        }
-      );
+        );
     }
   }
 
@@ -145,6 +209,4 @@ export class HabitacionComponent implements OnInit {
         );
     }
   }
-  
-
 }

@@ -103,5 +103,28 @@ export class HabitacionService {
     });
   }
 
+  public subirFoto(token: string, habitacionId: number, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    return new Observable<any>((observer) => {
+      axios
+        .put(`${this.ruta}/habitaciones/uploadPhoto/${habitacionId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+
 
 }
