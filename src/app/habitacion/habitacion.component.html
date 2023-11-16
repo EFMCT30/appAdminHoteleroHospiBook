@@ -108,7 +108,7 @@
             <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
           </div>
           <div class="col-12">
-            <label for="txtFileid" class="form-label">File</label>
+            <label for="txtFileid" class="form-label">Imagen</label>
             <input type="file" class="form-control" id="txtFileid" name="File" #fileInput>
           </div>
         </form>
@@ -122,7 +122,8 @@
 </div>
 
 <!--Actualizar-->
-<div class="modal fade" #exampleModal id="updateHabitacionModal" tabindex="-1" aria-labelledby="updateHabitacionModalLabel" aria-hidden="true">
+<!--Actualizar-->
+<div class="modal fade" #updateHabitacionModal id="updateHabitacionModal" tabindex="-1" aria-labelledby="updateHabitacionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -155,12 +156,17 @@
             <label for="txtTipo" class="form-label">Tipo</label>
             <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
           </div>
+          <div class="col-12">
+            <label for="txtFileid" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="txtFileid" name="File" #fileInputFromUpdate>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="updateHabitacion()" data-bs-dismiss="modal">Actualizar</button>
-      </div>
+        <button type="button" (click)="updateHabitacion()">Actualizar Habitación</button>
+         </div>
     </div>
   </div>
 </div>
+

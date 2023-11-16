@@ -27,12 +27,19 @@ export class HabitacionComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef =
     new ElementRef('fileInput');
 
+  @ViewChild('fileInputFromUpdate', { static: false })
+  fileInputFromUpdate: ElementRef = new ElementRef('fileInputFromUpdate');
+
   constructor(
     private habitacionService: HabitacionService,
     private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
+    this.listarHabitaciones();
+  }
+
+  listarHabitaciones() {
     this.token = this.tokenService.getToken();
 
     if (this.token) {
@@ -57,7 +64,7 @@ export class HabitacionComponent implements OnInit {
           (response) => {
             console.log('Nueva habitación registrada:', response);
             if (file) {
-              this.updatePhotoHabitacion(file, response);
+              this.updatePhotoHabitacion(file, response, false);
             } else {
               this.actualizarTablaHabitaciones(response);
             }
@@ -74,14 +81,19 @@ export class HabitacionComponent implements OnInit {
     }
   }
 
-  updatePhotoHabitacion(file: File, responseHabitacion: any) {
+  updatePhotoHabitacion(file: File, responseHabitacion: any, isFromUpdate: boolean) {
     console.log(responseHabitacion);
     if (this.token) {
       this.habitacionService
         .subirFoto(this.token, responseHabitacion.habitacionId, file)
         .subscribe(
           (response) => {
-            this.actualizarTablaHabitaciones(response);
+            if(isFromUpdate){
+              this.listarHabitaciones();
+            }
+            else {
+              this.actualizarTablaHabitaciones(response);
+            }
           },
           (error) => {
             console.error('Error al subir foto de la nueva habitación:', error);
@@ -95,7 +107,7 @@ export class HabitacionComponent implements OnInit {
     }
   }
 
-  actualizarTablaHabitaciones(response: any){
+  actualizarTablaHabitaciones(response: any) {
     this.habitaciones.push(response);
     this.newHabitacion = new Habitacion(
       0,
@@ -135,6 +147,7 @@ export class HabitacionComponent implements OnInit {
               .subscribe(
                 (response) => {
                   console.log('Habitación eliminada ID:', habitacionId);
+
                   this.habitaciones = this.habitaciones.filter(
                     (h) => h.habitacionId !== habitacionId
                   );
@@ -158,6 +171,7 @@ export class HabitacionComponent implements OnInit {
   }
 
   updateHabitacion() {
+    const file: File = this.fileInputFromUpdate.nativeElement.files[0];
     if (this.token && this.newHabitacion.hotelId !== 0) {
       this.habitacionService
         .updateHabitacion(
@@ -168,6 +182,11 @@ export class HabitacionComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Habitación actualizado:', response);
+            if (file) {
+              this.updatePhotoHabitacion(file, response, true);
+            } else {
+              this.listarHabitaciones();
+            }
 
             const index = this.habitaciones.findIndex(
               (h) => h.habitacionId === this.newHabitacion.habitacionId
@@ -193,6 +212,37 @@ export class HabitacionComponent implements OnInit {
           }
         );
     }
+  }
+
+  handleUpdateResponse(response: any) {
+    this.actualizarTablaHabitaciones(response);
+
+    const index = this.habitaciones.findIndex(
+      (h) => h.habitacionId === this.newHabitacion.habitacionId
+    );
+
+    if (index !== -1) {
+      this.habitaciones[index] = response;
+    }
+
+    Swal.fire({
+      icon: 'success',
+      title: '¡Habitación actualizada!',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  handleError(errorMessage: string) {
+    Swal.fire({
+      icon: 'error',
+      title: errorMessage,
+      text: 'Hubo un problema, por favor intenta de nuevo.',
+    });
+  }
+
+  onFileSelected(event: any) {
+    // Puedes realizar acciones adicionales aquí si es necesario
   }
 
   searchHabitacionesDisponibles() {
