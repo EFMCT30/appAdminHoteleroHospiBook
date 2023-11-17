@@ -109,7 +109,7 @@
           </div>
           <div class="col-12">
             <label for="txtFileid" class="form-label">Imagen</label>
-            <input type="file" class="form-control" id="txtFileid" name="File" #fileInput>
+            <input type="file" class="form-control" id="txtFileid" accept=".jpg, .jpeg"  name="File" #fileInput>
           </div>
         </form>
       </div>
@@ -158,13 +158,13 @@
           </div>
           <div class="col-12">
             <label for="txtFileid" class="form-label">Imagen</label>
-            <input type="file" class="form-control" id="txtFileid" name="File" #fileInputFromUpdate>
+            <input type="file" class="form-control" id="txtFileid" accept=".jpg, .jpeg"  name="File" #fileInputFromUpdate>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" (click)="updateHabitacion()">Actualizar Habitación</button>
+        <button type="button"  class="btn btn-primary" (click)="updateHabitacion()">Actualizar Habitación</button>
          </div>
     </div>
   </div>
