@@ -17,7 +17,7 @@ export class HotelComponent implements OnInit {
 
   hotel: any[] = [];
   token: string | null = null;
-  newHotel: Hotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
+  newHotel: Hotel = new Hotel(0, '', '', '', 0, '', new Date(), '',false);
   terminoBusqueda: string = '';
   hotelesFiltrados: any[] = [];
 
@@ -60,7 +60,7 @@ export class HotelComponent implements OnInit {
         (response) => {
           console.log('Nuevo hotel registrado:', response);
           this.hotel.push(response);
-          this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '');
+          this.newHotel = new Hotel(0, '', '', '', 0, '', new Date(), '',false);
 
           Swal.fire({
             icon: 'success',
@@ -168,5 +168,6 @@ export class HotelComponent implements OnInit {
       this.hotelesFiltrados = [];
     }
   }
+
 
 }
