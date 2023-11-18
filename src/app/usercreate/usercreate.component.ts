@@ -33,8 +33,9 @@ export class UsercreateComponent {
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
-
+    console.log('Token:', this.token); // Verifica si el token está presente
     if (this.token) {
+       this.testTokenValidity();
       this.axiosUserService.getAllUser(this.token).subscribe(
         (users) => {
           this.user = users;
@@ -44,6 +45,19 @@ export class UsercreateComponent {
         }
       );
     }
+  }
+
+  testTokenValidity() {
+    this.axiosUserService.getAllUser(this.token!).subscribe(
+      (response) => {
+        console.log('Respuesta de prueba:', response);
+        // Aquí puedes hacer algo con la respuesta si es necesaria
+      },
+      (error) => {
+        console.error('Error en la prueba de token:', error);
+        // Muestra algún mensaje o realiza una acción en caso de error
+      }
+    );
   }
 
   addNewUser() {
