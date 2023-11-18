@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Profileservice } from '../service/profile.service';
-import { User } from '../../Entity/Usuario';
+import { Usuario } from '../../Entity/Usuario';
 import { Cliente } from '../../Entity/UsuarioCliente';
 import Swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   profile: any[] = [];
   token: string | null = null;
-  profileData: Cliente = new Cliente(0, '', '', '', new Date(), false, '', new User(0, '', '', '', []));
+  profileData: Cliente = new Cliente(0, '', '', '', new Date(), false, '', new Usuario(0, '', '', '', []));
 
   constructor(
     private axiosProfileservice: Profileservice,
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   updateClient() {
     const camposVacios: string[] = [];
     const camposInvalidos: string[] = [];
-  
+
     // Verifica si algún campo obligatorio está vacío o contiene solo espacios en blanco
     if (!this.profileData.nombre) {
       camposVacios.push('Nombre');
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
     if (!this.profileData.direccion) {
       camposVacios.push('Dirección');
     }
-  
+
     if (camposVacios.length > 0 || camposInvalidos.length > 0) {
       let mensajeError = '';
       if (camposVacios.length > 0) {
@@ -64,16 +64,16 @@ export class ProfileComponent implements OnInit {
       if (camposInvalidos.length > 0) {
         mensajeError += `Los siguientes campos tienen formato inválido: ${camposInvalidos.join(', ')}.`;
       }
-  
+
       Swal.fire({
         icon: 'error',
         title: 'Campos inválidos u obligatorios',
         text: mensajeError,
       });
-  
+
       return;
     }
-  
+
     if (this.token && this.profileData.clienteId !== 0) {
       this.axiosProfileservice.updateClientInfo(this.token, this.profileData).subscribe(
         (response) => {
@@ -101,6 +101,6 @@ export class ProfileComponent implements OnInit {
       );
     }
   }
-  
-  
+
+
 }

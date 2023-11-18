@@ -1,4 +1,4 @@
-import { User } from '../Entity/Usuario';
+import { Usuario } from '../Entity/Usuario';
 
 export class Cliente {
   clienteId: number;
@@ -8,7 +8,7 @@ export class Cliente {
   fechaRegistro: Date;
   activo: boolean;
   preferencias: string;
-  user: User; // Referencia al usuario
+  user: Usuario; // Referencia al usuario
 
   constructor(
     clienteId: number,
@@ -18,7 +18,7 @@ export class Cliente {
     fechaRegistro: Date,
     activo: boolean,
     preferencias: string,
-    user: User // Agrega el parámetro del usuario
+    user: Usuario // Agrega el parámetro del usuario
   ) {
     this.clienteId = clienteId;
     this.nombre = nombre;

@@ -1,57 +1,155 @@
+<!--<div class="card table-responsive">-->
+<!--  <div class="card-header">-->
+<!--      <h5>Lista de Usuarios</h5>-->
+<!--  </div>-->
+<!--  <div class="card-body">-->
+<!--      <div class="row">-->
+<!--          <div class="col-sm-6 col-md-8">-->
+<!--              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                <i class="fa-solid fa-plus"></i> Crear Nuevo-->
+<!--              </button>-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 col-md-4 text-right">-->
+<!--            <form>-->
+<!--              <div class="row">-->
+<!--                <div class="col">-->
+<!--                  <input type="text" class="form-control">-->
+<!--                </div>-->
+<!--                <div class="col-auto">-->
+<!--                  <button type="button" class="btn btn-outline-warning">-->
+<!--                    <i class="fa-solid fa-magnifying-glass"></i> Buscar-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--  </div>-->
+
+<!--  <table id="tablaUser" class="table table-bordered table-hover table-striped">-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--          <th>Usuario ID</th>-->
+<!--          <th>Nombre Usuario</th>-->
+<!--          <th>Correo</th>-->
+<!--          <th>Tipo Usuario</th>-->
+<!--          <th>Acciones</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--      <tr *ngFor="let userItem of user; let i = index">-->
+<!--        <td>{{userItem.id}}</td>-->
+<!--        <td>{{userItem.username}}</td>-->
+<!--        <td>{{userItem.email}}</td>-->
+<!--        <td>-->
+<!--          <span *ngFor="let role of userItem.roles">{{ role.name }} </span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          &lt;!&ndash;a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a&ndash;&gt; |-->
+<!--          <a class="btn btn-outline-danger" (click)="deleteUser(userItem.id)"><i class="fa-solid fa-trash"></i> Eliminar</a>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      -->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</div>-->
+
+<!--<div class="modal fade" #exampleModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">Crear Usuarios</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form [formGroup]="userRegistrationForm">-->
+<!--          <div class="row">-->
+<!--            <div class="col-12">-->
+<!--              <label for="validationDefaultName" class="form-label">Nombre de Usuario</label>-->
+<!--              <input type="text" class="form-control" id="validationDefaultName" formControlName="name" required>-->
+<!--            </div>-->
+<!--            <div class="col-12">-->
+<!--              <label for="validationDefaultCorreo" class="form-label">Correo</label>-->
+<!--              <input type="email" class="form-control" id="validationDefaultCorreo" formControlName="email" required>-->
+<!--            </div>-->
+<!--            <div class="col-12">-->
+<!--              <label for="validationDefaultPassword" class="form-label">Contraseña</label>-->
+<!--              <input type="password" class="form-control" id="validationDefaultPassword" formControlName="password" required>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Add a Role field with a select dropdown &ndash;&gt;-->
+<!--            <div class="col-12">-->
+<!--              <label for="validationDefaultRole" class="form-label">Rol</label>-->
+<!--              <select class="form-select" id="validationDefaultRole" formControlName="role" required>-->
+<!--                <option value="ADMIN">ADMIN</option>-->
+<!--                <option value="USER" selected>USER</option>-->
+<!--                <option value="GUEST">GUEST</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Add more form controls as needed &ndash;&gt;-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>-->
+<!--        <button type="button" class="btn btn-primary" (click)="addNewUser()">Guardar</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
 <div class="card table-responsive">
   <div class="card-header">
-      <h5>Lista de Usuarios</h5>
+    <h5>Lista de Usuarios</h5>
   </div>
   <div class="card-body">
-      <div class="row">
-          <div class="col-sm-6 col-md-8">
-              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-solid fa-plus"></i> Crear Nuevo
-              </button>
-          </div>
-          <div class="col-sm-6 col-md-4 text-right">
-            <form>
-              <div class="row">
-                <div class="col">
-                  <input type="text" class="form-control">
-                </div>
-                <div class="col-auto">
-                  <button type="button" class="btn btn-outline-warning">
-                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="fa-solid fa-plus"></i> Crear Nuevo
+        </button>
       </div>
+      <div class="col-sm-6 col-md-4 text-right">
+        <form>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-warning">
+                <i class="fa-solid fa-magnifying-glass"></i> Buscar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <table id="tablaUser" class="table table-bordered table-hover table-striped">
     <thead>
-        <tr>
-          <th>Usuario ID</th>
-          <th>Nombre Usuario</th>
-          <th>Correo</th>
-          <th>Tipo Usuario</th>
-          <th>Acciones</th>
-        </tr>
+    <tr>
+      <th>Usuario ID</th>
+      <th>Nombre Usuario</th>
+      <th>Correo</th>
+      <th>Tipo Usuario</th>
+      <th>Acciones</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let userItem of user; let i = index">
-        <td>{{userItem.id}}</td>
-        <td>{{userItem.username}}</td>
-        <td>{{userItem.email}}</td>
-        <td>
-          <span *ngFor="let role of userItem.roles">{{ role.name }} </span>
-        </td>
-        <td>
-          <!--a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a--> |
-          <a class="btn btn-outline-danger" (click)="deleteUser(userItem.id)"><i class="fa-solid fa-trash"></i> Eliminar</a>
-        </td>
-      </tr>
-      
+    <tr *ngFor="let userItem of user; let i = index">
+      <td>{{userItem.id}}</td>
+      <td>{{userItem.username}}</td>
+      <td>{{userItem.email}}</td>
+      <td>
+        <span *ngFor="let role of userItem.roles">{{ role.name }} </span>
+      </td>
+      <td>
+        <!--a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a--> |
+        <a class="btn btn-outline-danger" (click)="deleteUser( userItem.id)"><i class="fa-solid fa-trash"></i> Eliminar</a>
+      </td>
+    </tr>
     </tbody>
-</table>
+  </table>
 </div>
 
 <div class="modal fade" #exampleModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,18 +163,17 @@
         <form [formGroup]="userRegistrationForm">
           <div class="row">
             <div class="col-12">
-              <label for="validationDefaultName" class="form-label">Nombre de Usuario</label>
-              <input type="text" class="form-control" id="validationDefaultName" formControlName="name" required>
+              <label for="validationDefaultUsername" class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="validationDefaultUsername" formControlName="username" required>
             </div>
             <div class="col-12">
-              <label for="validationDefaultCorreo" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="validationDefaultCorreo" formControlName="email" required>
+              <label for="validationDefaultEmail" class="form-label">Correo</label>
+              <input type="email" class="form-control" id="validationDefaultEmail" formControlName="email" required>
             </div>
             <div class="col-12">
               <label for="validationDefaultPassword" class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="validationDefaultPassword" formControlName="password" required>
             </div>
-            <!-- Add a Role field with a select dropdown -->
             <div class="col-12">
               <label for="validationDefaultRole" class="form-label">Rol</label>
               <select class="form-select" id="validationDefaultRole" formControlName="role" required>
@@ -96,4 +193,5 @@
     </div>
   </div>
 </div>
+
 

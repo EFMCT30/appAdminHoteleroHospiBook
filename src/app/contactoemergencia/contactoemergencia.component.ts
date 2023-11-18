@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Profileservice } from '../service/profile.service';
 import { ClienteEmergencia } from 'src/Entity/UsuarioClienteEmergencia';
-import { User } from '../../Entity/Usuario';
+import { Usuario } from '../../Entity/Usuario';
 import { Cliente } from '../../Entity/UsuarioCliente';
 import Swal from 'sweetalert2';
 
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ContactoemergenciaComponent implements OnInit {
   token: string | null = null;
-  profileDataEmergency: ClienteEmergencia = new ClienteEmergencia(0,"","","","","",new Cliente(0,"","","",new Date,false,"",new User(0, '', '', '', [])));
+  profileDataEmergency: ClienteEmergencia = new ClienteEmergencia(0,"","","","","",new Cliente(0,"","","",new Date,false,"",new Usuario(0, '', '', '', [])));
 
 
   constructor(
@@ -38,7 +38,7 @@ export class ContactoemergenciaComponent implements OnInit {
       console.error('Token es nulo o inválido. No se puede obtener la información del contacto de emergencia del cliente.');
     }
   }
-  
+
 
   populateClientEmergencyInfo(response: any): void {
     // Verifica la estructura y nomenclatura de las claves de 'response' para asegurarte que coincidan con los campos de ClienteEmergencia
@@ -52,17 +52,17 @@ export class ContactoemergenciaComponent implements OnInit {
         response.address,
         response.clienteId // Asegúrate de que este campo coincida con la estructura del objeto Cliente
       );
-  
+
       console.log('Contacto de emergencia del cliente:', this.profileDataEmergency);
     } else {
       console.error('No se recibieron datos válidos para el contacto de emergencia del cliente.');
     }
   }
-  
+
   updateEmergency() {
     const camposVacios: string[] = [];
     const camposInvalidos: string[] = [];
-  
+
     // Verifica si algún campo obligatorio está vacío o contiene solo espacios en blanco
     if (!this.profileDataEmergency.contactName.trim()) {
       camposVacios.push('Nombre de Contacto');
@@ -83,7 +83,7 @@ export class ContactoemergenciaComponent implements OnInit {
     if (!this.profileDataEmergency.address.trim()) {
       camposVacios.push('Dirección de Contacto');
     }
-  
+
     if (camposVacios.length > 0 || camposInvalidos.length > 0) {
       let mensajeError = '';
       if (camposVacios.length > 0) {
@@ -92,16 +92,16 @@ export class ContactoemergenciaComponent implements OnInit {
       if (camposInvalidos.length > 0) {
         mensajeError += `Los siguientes campos tienen formato inválido: ${camposInvalidos.join(', ')}.`;
       }
-  
+
       Swal.fire({
         icon: 'error',
         title: 'Campos inválidos u obligatorios',
         text: mensajeError,
       });
-  
+
       return;
     }
-  
+
     if (this.token && this.profileDataEmergency.emergencyContactId !== 0) {
       this.axiosProfileservice.updateEmergencyInfo(this.token, this.profileDataEmergency).subscribe(
         (response) => {
@@ -129,6 +129,6 @@ export class ContactoemergenciaComponent implements OnInit {
       );
     }
   }
-  
+
 
 }

@@ -1,15 +1,15 @@
-export class User {
+export class Usuario {
   id: number;
   email: string;
   password: string;
   username: string;
-  roles: Role[];
+  roles: string[]; // Change the type to string array
 
-  constructor(id: number, email: string, password: string, username: string, roles: Role[]) {
+  constructor(id: number, email: string, password: string, username: string, roles: string[]) {
     this.id = id;
+    this.username = username;
     this.email = email;
     this.password = password;
-    this.username = username;
     this.roles = roles;
   }
 }

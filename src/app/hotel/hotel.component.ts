@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class HotelComponent implements OnInit {
 
-  @ViewChild('exampleModal') exampleModal!: ElementRef;
-  @ViewChild('updateHotelModal') updateHotelModal!: ElementRef;
+  // @ViewChild('exampleModal') exampleModal!: ElementRef;
+  // @ViewChild('updateHotelModal') updateHotelModal!: ElementRef;
 
   hotel: any[] = [];
   token: string | null = null;

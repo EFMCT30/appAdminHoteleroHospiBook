@@ -36,8 +36,10 @@ export class UserService {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+
         })
         .then((response) => {
+          console.log(response)
           observer.next(response.data);
           observer.complete();
         })
@@ -61,9 +63,11 @@ export class UserService {
           observer.complete();
         })
         .catch((error) => {
+          console.error('Error deleting user:', error);
           observer.error(error);
         });
     });
   }
+
 
 }
