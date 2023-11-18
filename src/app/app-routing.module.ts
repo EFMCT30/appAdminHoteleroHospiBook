@@ -41,7 +41,7 @@ const routes: Routes = [
       {
         path: 'usercreate',
         component: LayoutComponent,
-        data: { title: 'Crear Usuario' },
+        //data: { title: 'Crear Usuario' },
       },
       // Add other routes as needed
     ],

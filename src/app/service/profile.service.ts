@@ -11,41 +11,6 @@ export class Profileservice {
 
   constructor() { }
 
-  // public getUsers(token: string): Observable<any> {
-  //   return new Observable<any>((observer) => {
-  //     axios
-  //       .get(`${this.ruta}/cliente/listarClientes`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         observer.next(response.data);
-  //         observer.complete();
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   });
-  // }
-
-  // public getUserInfoById(token: string, userId: number): Observable<any> {
-  //   return new Observable<any>((observer) => {
-  //     axios
-  //       .get(`${this.ruta}/cliente/${userId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         observer.next(response.data);
-  //         observer.complete();
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   });
-  // }
 
   getUserInfo(token: string): Observable<any> {
     return new Observable<any>((observer) => {

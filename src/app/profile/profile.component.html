@@ -3,15 +3,7 @@
     <h5 class="card-header">Perfil de Usuario</h5>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
-                <!-- Cuadro de imagen de perfil -->
-                <label for="profileDataPicture" class="form-label">Foto de perfil</label>
-                <div class="d-flex flex-column align-items-center">
-                    <img id="profileDataPicturePreview" src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profileData-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=" alt="Foto de perfil" class="rounded-circle me-3" width="150px" height="150px">
-                    <input type="file" class="form-control" id="profileDataPicture" accept="image/*">
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col-12">
                 <!-- Formulario de perfil -->
                 <form class="row g-3">
                     <div class="col-md-4">
@@ -46,9 +38,11 @@
                             </div>
                         </div>
                     </div>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateprofileDataModal">
-                    Editar Perfil
-                  </button>
+                    <div class="col-12">
+                      <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#updateprofileDataModal">
+                        Editar Perfil
+                      </button>
+                    </div>
                 </form>
             </div>
         </div>
