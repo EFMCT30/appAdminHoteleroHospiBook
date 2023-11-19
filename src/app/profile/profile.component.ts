@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
-    console.log(this.token);
     if (this.token) {
       this.axiosProfileservice.getUserInfo(this.token).subscribe(
         (data) => {
@@ -43,7 +42,6 @@ export class ProfileComponent implements OnInit {
     const camposVacios: string[] = [];
     const camposInvalidos: string[] = [];
 
-    // Verifica si algún campo obligatorio está vacío o contiene solo espacios en blanco
     if (!this.profileData.nombre) {
       camposVacios.push('Nombre');
     }
@@ -77,7 +75,6 @@ export class ProfileComponent implements OnInit {
     if (this.token && this.profileData.clienteId !== 0) {
       this.axiosProfileservice.updateClientInfo(this.token, this.profileData).subscribe(
         (response) => {
-          console.log('Cliente actualizado:', response);
           Swal.fire({
             icon: 'success',
             title: '¡Cliente actualizado!',

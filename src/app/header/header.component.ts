@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
+import {TokenService} from "../service/token.service";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,24 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private authService: AuthService,private router: Router) {}
+  loggedInUsername: string | null = null;
+  constructor(private authService: AuthService,private router: Router,private axiosUserService: UserService,
+    private tokenService: TokenService) {}
+
+  ngOnInit(): void {
+    const token = this.tokenService.getToken(); 
+    if (token) {
+      this.axiosUserService.getUsername(token).subscribe(
+        (username) => {
+          this.loggedInUsername = username;
+          console.log(this.loggedInUsername);
+        },
+        (error) => {
+          console.error('Error al obtener el nombre de usuario:', error);
+        }
+      );
+    }
+  }
 
   logout(): void {
     this.authService.logout();

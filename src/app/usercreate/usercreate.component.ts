@@ -44,74 +44,21 @@ export class UsercreateComponent {
     }
   }
 
-  testTokenValidity() {
-    this.axiosUserService.getAllUser(this.token!).subscribe(
-      (response) => {
-        console.log('Respuesta de prueba:', response);
-        // Aquí puedes hacer algo con la respuesta si es necesaria
-      },
-      (error) => {
-        console.error('Error en la prueba de token:', error);
-        // Muestra algún mensaje o realiza una acción en caso de error
-      }
-    );
-  }
-
-  // addNewUser() {
-  //   // Verifica si hay un token
-  //   if (this.token) {
-  //     this.axiosUserService.addUser(this.token, this.newUser).subscribe(
-  //       (response) => {
-  //         console.log('Nuevo Usuario registrado:', response);
-  //         this.user.push(response);
-  //         this.newUser = new User(0, '', '', '', []);
-  //
-  //         Swal.fire({
-  //           icon: 'success',
-  //           title: 'Usuario añadido!',
-  //           showConfirmButton: false,
-  //           timer: 1500,
-  //         });
-  //       },
-  //       (error) => {
-  //         console.error('Error al registrar el nuevo usuario:', error);
-  //         Swal.fire({
-  //           icon: 'error',
-  //           title: 'Error al añadir el usuario',
-  //           text: 'Hubo un problema al registrar el USUARIO, por favor intenta de nuevo.',
-  //         });
-  //       }
-  //     );
-  //   } else {
-  //     // Muestra un mensaje al usuario indicando que no hay token
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Token no disponible',
-  //       text: 'No se ha proporcionado un token válido para realizar la operación.',
-  //     });
-  //   }
-  // }
 
 
   addNewUser() {
-    // Verifica si hay un token
     if (this.token) {
-      // Verifica si el formulario es válido
       if (this.userRegistrationForm.valid) {
-        // Obtén los valores del formulario
         const formData = this.userRegistrationForm.value
-        // Access the selected role from the form value
+
         const selectedRole = formData.role;
 
-        // Crea un nuevo objeto User con los valores del formulario
         const newUser: Usuario = new Usuario(0, formData.email, formData.password, formData.username, [selectedRole]);
-
-        // Llama al servicio para agregar el nuevo usuario
         this.axiosUserService.addUser(this.token, newUser).subscribe(
           (response) => {
             console.log('Nuevo Usuario registrado:', response);
             this.user.push(response);
-            // Reinicia el formulario después de agregar el usuario
+
             this.userRegistrationForm.reset();
 
             Swal.fire({
@@ -132,7 +79,6 @@ export class UsercreateComponent {
           }
         );
       } else {
-        // Muestra un mensaje al usuario indicando que el formulario no es válido
         Swal.fire({
           icon: 'error',
           title: 'Formulario no válido',
@@ -140,7 +86,6 @@ export class UsercreateComponent {
         });
       }
     } else {
-      // Muestra un mensaje al usuario indicando que no hay token
       Swal.fire({
         icon: 'error',
         title: 'Token no disponible',
