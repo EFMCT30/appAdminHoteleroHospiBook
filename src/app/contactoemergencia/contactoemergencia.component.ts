@@ -23,7 +23,6 @@ export class ContactoemergenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
-    console.log(this.token);
     if (this.token) {
       this.axiosProfileservice.getUserInfoContact(this.token).subscribe(
         (data) => {
@@ -31,7 +30,6 @@ export class ContactoemergenciaComponent implements OnInit {
         },
         (error) => {
           console.error('Error al obtener información del contacto de emergencia del cliente:', error);
-          // Manejar errores aquí
         }
       );
     } else {
@@ -52,8 +50,6 @@ export class ContactoemergenciaComponent implements OnInit {
         response.address,
         response.clienteId // Asegúrate de que este campo coincida con la estructura del objeto Cliente
       );
-
-      console.log('Contacto de emergencia del cliente:', this.profileDataEmergency);
     } else {
       console.error('No se recibieron datos válidos para el contacto de emergencia del cliente.');
     }
@@ -63,7 +59,6 @@ export class ContactoemergenciaComponent implements OnInit {
     const camposVacios: string[] = [];
     const camposInvalidos: string[] = [];
 
-    // Verifica si algún campo obligatorio está vacío o contiene solo espacios en blanco
     if (!this.profileDataEmergency.contactName.trim()) {
       camposVacios.push('Nombre de Contacto');
     }
@@ -105,7 +100,6 @@ export class ContactoemergenciaComponent implements OnInit {
     if (this.token && this.profileDataEmergency.emergencyContactId !== 0) {
       this.axiosProfileservice.updateEmergencyInfo(this.token, this.profileDataEmergency).subscribe(
         (response) => {
-          console.log('Contacto de emergencia actualizado:', response);
           Swal.fire({
             icon: 'success',
             title: '¡Contacto de emergencia actualizado!',

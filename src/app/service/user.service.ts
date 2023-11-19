@@ -11,6 +11,23 @@ export class UserService {
 
   constructor() { }
 
+  getUsername(token: string): Observable<string> {
+    return new Observable<string>((observer) => {
+      axios.get<string>(`${this.ruta}/getUsername`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error) => {
+        observer.error(error);
+      });
+    });
+  }
+
   getAllUser(token: string): Observable<any> {
     return new Observable<any>((observer) => {
       axios
