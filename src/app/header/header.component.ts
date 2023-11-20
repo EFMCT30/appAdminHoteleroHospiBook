@@ -20,7 +20,6 @@ export class HeaderComponent {
       this.axiosUserService.getUsername(token).subscribe(
         (username) => {
           this.loggedInUsername = username;
-          console.log(this.loggedInUsername);
         },
         (error) => {
           console.error('Error al obtener el nombre de usuario:', error);
@@ -32,6 +31,6 @@ export class HeaderComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']); // Redirect to the login page
-    // You can also add a redirection to the login page or perform other logout-related actions here.
+   
   }
 }

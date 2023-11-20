@@ -50,15 +50,11 @@ export class UsercreateComponent {
     if (this.token) {
       if (this.userRegistrationForm.valid) {
         const formData = this.userRegistrationForm.value
-
         const selectedRole = formData.role;
-
         const newUser: Usuario = new Usuario(0, formData.email, formData.password, formData.username, [selectedRole]);
         this.axiosUserService.addUser(this.token, newUser).subscribe(
           (response) => {
-            console.log('Nuevo Usuario registrado:', response);
             this.user.push(response);
-
             this.userRegistrationForm.reset();
 
             Swal.fire({
@@ -126,8 +122,13 @@ export class UsercreateComponent {
           if (this.token !== null) {
             this.axiosUserService.deleteUser(this.token, userId).subscribe(
               (response) => {
-                console.log('Usuario eliminado ID:', userId);
                 this.getAllUsers();
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Usuario eliminado',
+                  text: 'El usuario ha sido eliminado exitosamente.',
+                });
               },
               (error) => {
                 console.error('Error al eliminar el Usuario:', error);
@@ -145,7 +146,7 @@ export class UsercreateComponent {
       console.error('Token is null');
     }
   }
-
+  
 
 
   onSubmit() {
