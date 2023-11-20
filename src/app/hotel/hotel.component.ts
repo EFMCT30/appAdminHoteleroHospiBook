@@ -99,9 +99,20 @@ export class HotelComponent implements OnInit {
             this.axiosHotelService.deleteHotel(this.token, hotelId).subscribe(
               (response) => {
                 this.hotel = this.hotel.filter((h) => h.hotelId !== hotelId);
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Hotel eliminado',
+                  text: 'El hotel ha sido eliminado exitosamente.',
+                });
               },
               (error) => {
                 console.error('Error al eliminar el hotel:', error);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error al eliminar el hotel',
+                  text: 'Hubo un problema al eliminar el hotel, por favor intenta de nuevo.',
+                });
               }
             );
           }
@@ -109,6 +120,7 @@ export class HotelComponent implements OnInit {
       });
     }
   }
+  
 
 
   openUpdateModal(hotel: Hotel) {

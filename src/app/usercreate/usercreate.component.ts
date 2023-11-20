@@ -128,6 +128,12 @@ export class UsercreateComponent {
               (response) => {
                 console.log('Usuario eliminado ID:', userId);
                 this.getAllUsers();
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Usuario eliminado',
+                  text: 'El usuario ha sido eliminado exitosamente.',
+                });
               },
               (error) => {
                 console.error('Error al eliminar el Usuario:', error);
@@ -145,7 +151,7 @@ export class UsercreateComponent {
       console.error('Token is null');
     }
   }
-
+  
 
 
   onSubmit() {
