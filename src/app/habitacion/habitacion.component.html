@@ -56,7 +56,7 @@
         <td>{{ habitacionItem.precioNoche | currency: 'USD' }}</td>
         <td>{{ habitacionItem.tipo }}</td>
         <td>{{ habitacionItem.hotelId }}</td>
-        <td><img src='{{"http://localhost:8081/"+habitacionItem.imageUrl}}'></td>
+        <td><img style="width: 150px; height: 100px;" src='{{"http://localhost:8081/"+habitacionItem.imageUrl}}'></td>
         <td>
           <button data-bs-toggle="modal" data-bs-target="#updateHabitacionModal" (click)="openUpdateModal(habitacionItem)"
                         class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
