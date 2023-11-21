@@ -10,13 +10,13 @@
               </button>
           </div>
           <div class="col-sm-6 col-md-4 text-right">
-            <form>
+            <form (ngSubmit)="buscarHoteles()">
               <div class="row">
                 <div class="col">
-                  <input type="text" class="form-control" [(ngModel)]="terminoBusqueda" name="searchTerm">
+                  <input type="text" placeholder="Buscar por palabras que contenga" class="form-control" [(ngModel)]="terminoBusqueda" name="searchTerm">
                 </div>
                 <div class="col-auto">
-                  <button type="button" class="btn btn-outline-warning" (click)="buscarHoteles()">
+                  <button type="submit" class="btn btn-outline-warning">
                     <i class="fa-solid fa-magnifying-glass"></i> Buscar
                   </button>
                 </div>
@@ -37,6 +37,7 @@
               <th>Estrellas</th>
               <th>Fecha de Construcción</th>
               <th>Teléfono</th>
+              <th>Disponible</th>
               <th>Acciones</th>
           </tr>
       </thead>
@@ -51,9 +52,10 @@
                   <td>{{hotelItem.categoria}}</td>
                   <td>{{hotelItem.descripcion}}</td>
                   <td>{{hotelItem.direccion}}</td>
-                  <td>{{hotelItem.estrellas}}</td>
-                  <td>{{hotelItem.fechaConstruccion}}</td>
+                  <td>{{hotelItem.estrellas}} estrellas</td>
+                  <td>{{hotelItem.fechaConstruccion | date: 'dd/MM/yyyy'}}</td>
                   <td>{{hotelItem.telefono}}</td>
+                  <td>{{hotelItem.disponible ? 'Sí' : 'No' }}</td>
                   <td>
                       <button data-bs-toggle="modal" data-bs-target="#updateHotelModal" (click)="openUpdateModal(hotelItem)"
                           class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
@@ -71,9 +73,10 @@
                   <td>{{hotelItem.categoria}}</td>
                   <td>{{hotelItem.descripcion}}</td>
                   <td>{{hotelItem.direccion}}</td>
-                  <td>{{hotelItem.estrellas}}</td>
-                  <td>{{hotelItem.fechaConstruccion}}</td>
+                  <td>{{hotelItem.estrellas}} estrellas</td>
+                  <td>{{hotelItem.fechaConstruccion | date: 'dd/MM/yyyy'}}</td>
                   <td>{{hotelItem.telefono}}</td>
+                  <td>{{hotelItem.disponible ? 'Sí' : 'No' }}</td>
                   <td>
                       <button data-bs-toggle="modal" data-bs-target="#updateHotelModal" (click)="openUpdateModal(hotelItem)"
                           class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
@@ -110,8 +113,14 @@
             <input type="text" class="form-control" id="txtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
           </div>
           <div class="col-12">
-            <label for="txtEstrellas" class="form-label">Estrellas</label>
-            <input type="number" class="form-control" id="txtEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+            <label for="selEstrellas" class="form-label">Estrellas</label>
+            <select class="form-select" id="selEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+              <option value="1">1 estrella</option>
+              <option value="2">2 estrellas</option>
+              <option value="3">3 estrellas</option>
+              <option value="4">4 estrellas</option>
+              <option value="5">5 estrellas</option>
+            </select>
           </div>
           <div class="col-12">
             <label for="txtDescripcion" class="form-label">Descripción</label>
@@ -119,11 +128,21 @@
           </div>
           <div class="col-12">
             <label for="txtFecha" class="form-label">Fecha de construcción</label>
-            <input type="text" class="form-control" id="txtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
+            <input type="date" class="form-control" id="txtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
           </div>
           <div class="col-12">
-            <label for="txtCategoria" class="form-label">Categoría</label>
-            <input type="text" class="form-control" id="txtCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+            <label for="selCategoria" class="form-label">Categoría</label>
+            <select class="form-select" id="selCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+              <option value="Lujo 1">Lujo 1</option>
+              <option value="Lujo 2">Lujo 2</option>
+              <option value="Lujo 3">Lujo 3</option>
+              <option value="Lujo 4">Lujo 4</option>
+              <option value="Lujo 5">Lujo 5</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="toggleDisponible" class="form-label">Disponible</label>
+            <input type="checkbox" required [(ngModel)]="newHotel.disponible" id="toggleDisponible" name="disponible">
           </div>
         </form>
       </div>
@@ -158,8 +177,14 @@
             <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
           </div>
           <div class="col-12">
-            <label for="updateTxtEstrellas" class="form-label">Estrellas</label>
-            <input type="number" class="form-control" id="updateTxtEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+            <label for="selEstrellas" class="form-label">Estrellas</label>
+            <select class="form-select" id="selEstrellas" name="estrellas" required [(ngModel)]="newHotel.estrellas">
+              <option value="1">1 estrella</option>
+              <option value="2">2 estrellas</option>
+              <option value="3">3 estrellas</option>
+              <option value="4">4 estrellas</option>
+              <option value="5">5 estrellas</option>
+            </select>
           </div>
           <div class="col-12">
             <label for="updateTxtDescripcion" class="form-label">Descripción</label>
@@ -167,11 +192,21 @@
           </div>
           <div class="col-12">
             <label for="updateTxtFecha" class="form-label">Fecha de construcción</label>
-            <input type="text" class="form-control" id="updateTxtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
+            <input type="date" class="form-control" id="updateTxtFecha" name="fechaConstruccion" required [(ngModel)]="newHotel.fechaConstruccion">
           </div>
           <div class="col-12">
-            <label for="updateTxtCategoria" class="form-label">Categoría</label>
-            <input type="text" class="form-control" id="updateTxtCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+            <label for="selCategoria" class="form-label">Categoría</label>
+            <select class="form-select" id="selCategoria" name="categoria" required [(ngModel)]="newHotel.categoria">
+              <option value="Lujo 1">Lujo 1</option>
+              <option value="Lujo 2">Lujo 2</option>
+              <option value="Lujo 3">Lujo 3</option>
+              <option value="Lujo 4">Lujo 4</option>
+              <option value="Lujo 5">Lujo 5</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="toggleDisponible" class="form-label">Disponible</label>
+            <input type="checkbox" required [(ngModel)]="newHotel.disponible" id="toggleDisponible" name="disponible">
           </div>
         </form>
       </div>
