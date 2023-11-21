@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HabitacionService } from '../service/habitacion.service';
+import { HotelserviceService } from '../service/hotelservice.service';
 import { TokenService } from '../service/token.service';
 import Swal from 'sweetalert2';
 import { Habitacion } from 'src/Entity/Habitacion';
@@ -10,6 +11,7 @@ import { Habitacion } from 'src/Entity/Habitacion';
   styleUrls: ['./habitacion.component.css'],
 })
 export class HabitacionComponent implements OnInit {
+  hotelesDisponibles: any[] = [];
   habitaciones: Habitacion[] = [];
   token: string | null = null;
   newHabitacion: Habitacion = new Habitacion(
@@ -23,6 +25,7 @@ export class HabitacionComponent implements OnInit {
     0,
     'uploads/images/empty-room.jpg'
   );
+
   searchQuery: string = '';
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef =
     new ElementRef('fileInput');
@@ -32,11 +35,27 @@ export class HabitacionComponent implements OnInit {
 
   constructor(
     private habitacionService: HabitacionService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private axiosHotelService: HotelserviceService
   ) {}
 
   ngOnInit(): void {
     this.listarHabitaciones();
+    this.token = this.tokenService.getToken();
+
+  if (this.token) {
+    this.axiosHotelService.getHotels(this.token).subscribe(
+      (hotels) => {
+        this.hotelesDisponibles = hotels;
+        if (this.hotelesDisponibles.length > 0) {
+          this.newHabitacion.hotelId = this.hotelesDisponibles[0].hotelId; // Establecer el primer hotel por defecto
+        }
+      },
+      (error) => {
+        console.error('Error fetching hotels:', error);
+      }
+    );
+  }
   }
 
   listarHabitaciones() {
@@ -54,7 +73,7 @@ export class HabitacionComponent implements OnInit {
     }
   }
 
-  addNewHabitacion() {
+  /*addNewHabitacion() {
     console.log(JSON.stringify(this.newHabitacion));
     const file: File = this.fileInput.nativeElement.files[0];
     if (this.token) {
@@ -79,7 +98,74 @@ export class HabitacionComponent implements OnInit {
           }
         );
     }
+  }*/
+
+  addNewHabitacion() {
+    const camposVacios: string[] = [];
+  const camposInvalidos: string[] = [];
+  
+  if (!this.newHabitacion.capacidad || this.newHabitacion.capacidad > 6) {
+    camposInvalidos.push('Capacidad (máximo 6)');
   }
+  if (!this.newHabitacion.fechaUltimaMantenimiento) {
+    camposVacios.push('Fecha de Último Mantenimiento');
+  }
+  if (!this.newHabitacion.numeroHabitacion) {
+    camposVacios.push('Número de Habitación');
+  }
+  if (!this.newHabitacion.precioNoche || this.newHabitacion.precioNoche < 250) {
+    camposInvalidos.push('Precio por Noche (mínimo $250)');
+  }
+  if (!this.newHabitacion.tipo) {
+    camposVacios.push('Tipo de Habitación');
+  }
+  if (!this.newHabitacion.hotelId) {
+    camposVacios.push('Nombre del Hotel');
+  }
+
+
+  if (camposVacios.length > 0 || camposInvalidos.length > 0) {
+    let mensaje = '';
+    if (camposVacios.length > 0) {
+      mensaje += `Por favor completa los siguientes campos: ${camposVacios.join(', ')}. `;
+    }
+    if (camposInvalidos.length > 0) {
+      mensaje += `Los siguientes campos tienen datos inválidos o no cumplen con los requisitos: ${camposInvalidos.join(', ')}.`;
+    }
+    Swal.fire({
+      icon: 'warning',
+      title: 'Datos incompletos o inválidos',
+      text: mensaje,
+    });
+  } else {
+      // Aquí procederías a agregar la habitación
+      console.log(JSON.stringify(this.newHabitacion));
+      const file: File = this.fileInput.nativeElement.files[0];
+      if (this.token) {
+        this.habitacionService
+          .addHabitacion(this.token, this.newHabitacion)
+          .subscribe(
+            (response) => {
+              console.log('Nueva habitación registrada:', response);
+              if (file) {
+                this.updatePhotoHabitacion(file, response, false);
+              } else {
+                this.actualizarTablaHabitaciones(response);
+              }
+            },
+            (error) => {
+              console.error('Error al registrar la nueva habitación:', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Error al añadir la habitación',
+                text: 'Hubo un problema al registrar la habitación, por favor intenta de nuevo.',
+              });
+            }
+          );
+      }
+    }
+  }
+  
 
   updatePhotoHabitacion(file: File, responseHabitacion: any, isFromUpdate: boolean) {
     console.log(responseHabitacion);

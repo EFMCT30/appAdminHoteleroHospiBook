@@ -102,15 +102,15 @@
         <form class="row g-3">
           <div class="col-12">
             <label for="txtNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="txtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
+            <input type="text" maxlength="30" class="form-control" id="txtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
           </div>
           <div class="col-12">
             <label for="txtDireccion" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="txtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
+            <input type="text" maxlength="50" class="form-control" id="txtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
           </div>
           <div class="col-12">
             <label for="txtTelefono" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="txtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
+            <input type="text" maxlength="9" class="form-control" id="txtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
           </div>
           <div class="col-12">
             <label for="selEstrellas" class="form-label">Estrellas</label>
@@ -124,7 +124,7 @@
           </div>
           <div class="col-12">
             <label for="txtDescripcion" class="form-label">Descripción</label>
-            <input type="text" class="form-control" id="txtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
+            <input type="text"  maxlength="200" placeholder="Máx. 200 caracteres" class="form-control" id="txtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
           </div>
           <div class="col-12">
             <label for="txtFecha" class="form-label">Fecha de construcción</label>
@@ -166,15 +166,15 @@
         <form class="row g-3">
           <div class="col-12">
             <label for="updateTxtNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
+            <input type="text" maxlength="30" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="newHotel.nombre">
           </div>
           <div class="col-12">
             <label for="updateTxtDireccion" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
+            <input type="text"  maxlength="50" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="newHotel.direccion">
           </div>
           <div class="col-12">
             <label for="updateTxtTelefono" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
+            <input type="number"  maxlength="9" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="newHotel.telefono">
           </div>
           <div class="col-12">
             <label for="selEstrellas" class="form-label">Estrellas</label>
@@ -188,7 +188,7 @@
           </div>
           <div class="col-12">
             <label for="updateTxtDescripcion" class="form-label">Descripción</label>
-            <input type="text" class="form-control" id="updateTxtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
+            <input type="text"  maxlength="200" placeholder="Máx. 200 caracteres" class="form-control" id="updateTxtDescripcion" name="descripcion" required [(ngModel)]="newHotel.descripcion">
           </div>
           <div class="col-12">
             <label for="updateTxtFecha" class="form-label">Fecha de construcción</label>
