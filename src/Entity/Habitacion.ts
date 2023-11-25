@@ -7,6 +7,7 @@ export class Habitacion {
     public precioNoche: number,
     public disponible: boolean,
     public fechaUltimaMantenimiento: Date,
-    public hotelId: number
+    public hotelId: number,
+    public imageUrl:string
   ) {}
 }

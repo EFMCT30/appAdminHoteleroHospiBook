@@ -54,7 +54,7 @@ export class HotelserviceService {
   public updateHotel(token: string, hotelId: number, updatedHotelData: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
-        .put(`${this.ruta}/hoteles/${hotelId}`, updatedHotelData, {
+        .put(`${this.ruta}/hoteles/actualizar/${hotelId}`, updatedHotelData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -74,7 +74,7 @@ export class HotelserviceService {
   public deleteHotel(token: string, hotelId: number): Observable<any> {
     return new Observable<any>((observer) => {
       axios
-        .delete(`${this.ruta}/hoteles/${hotelId}`, {
+        .delete(`${this.ruta}/hoteles/eliminar/${hotelId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

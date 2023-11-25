@@ -18,7 +18,7 @@
                               <i class="fa-solid fa-magnifying-glass p-2"></i> Listar Habitación Disponibles
                           </button>
                       </div>
-                      
+
                       <div class="col-auto">
                           <button class="btn btn-outline-warning " (click)="ngOnInit()">
                               <i class="fa-solid fa-magnifying-glass p-2"></i> Borrar Filtro
@@ -26,7 +26,7 @@
                       </div>
                   </div>
               </form>
-          </div>          
+          </div>
         </div>
     </div>
 
@@ -42,6 +42,7 @@
             <th>Precio de la noche</th>
             <th>Tipo</th>
             <th>Hotel</th>
+            <th>Foto</th>
             <th>Acciones</th>
           </tr>
       </thead>
@@ -50,15 +51,16 @@
         <td>{{ habitacionItem.habitacionId}}</td>
         <td>{{ habitacionItem.capacidad }}</td>
         <td>{{ habitacionItem.disponible ? 'Sí' : 'No' }}</td>
-        <td>{{ habitacionItem.fechaUltimaMantenimiento }}</td>
+        <td>{{ habitacionItem.fechaUltimaMantenimiento | date: 'dd/MM/yyyy' }}</td>
         <td>{{ habitacionItem.numeroHabitacion }}</td>
         <td>{{ habitacionItem.precioNoche | currency: 'USD' }}</td>
         <td>{{ habitacionItem.tipo }}</td>
         <td>{{ habitacionItem.hotelId }}</td>
+        <td><img style="width: 150px; height: 100px;" src='{{"http://localhost:8081/"+habitacionItem.imageUrl}}'></td>
         <td>
           <button data-bs-toggle="modal" data-bs-target="#updateHabitacionModal" (click)="openUpdateModal(habitacionItem)"
                         class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button> |
-                 
+
           <button (click)="deleteHabitacion(habitacionItem.habitacionId)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
         </td>
       </tr>
@@ -84,10 +86,10 @@
           <div class="col-12">
             <label for="toggleDisponible" class="form-label">Disponible</label>
             <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
-          </div>            
+          </div>
           <div class="col-12">
-            <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
-            <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+            <label for="txtFechaUltimaMantenimiento" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
           </div>
           <div class="col-12">
             <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
@@ -98,12 +100,22 @@
             <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
           </div>
           <div class="col-12">
-            <label for="txtTipo" class="form-label">Tipo</label>
-            <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
-          </div>
+            <label for="cmbTipos" class="form-label">Tipo de Habitación</label>
+            <select class="form-select" id="cmbTipos" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+                <option value="individual" selected>Individual</option>
+                <option value="doble">Doble</option>
+                <option value="suite">Suite</option>
+            </select>
+        </div>        
+        <div class="col-12">
+          <label for="cmbHoteles" class="form-label">Nombre del Hotel</label>
+          <select class="form-select" id="cmbHoteles" name="hotelId" required [(ngModel)]="newHabitacion.hotelId">
+            <option *ngFor="let hotel of hotelesDisponibles; let first = first" [value]="hotel.hotelId" [selected]="first">{{ hotel.nombre }}</option>
+          </select>
+        </div>
           <div class="col-12">
-            <label for="txtHotelid" class="form-label">HotelId</label>
-            <input type="number" class="form-control" id="txtHotelid" name="HotelId" required [(ngModel)]="newHabitacion.hotelId">
+            <label for="txtFileid" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="txtFileid" accept=".jpg, .jpeg"  name="File" #fileInput>
           </div>
         </form>
       </div>
@@ -116,7 +128,8 @@
 </div>
 
 <!--Actualizar-->
-<div class="modal fade" #exampleModal id="updateHabitacionModal" tabindex="-1" aria-labelledby="updateHabitacionModalLabel" aria-hidden="true">
+<!--Actualizar-->
+<div class="modal fade" #updateHabitacionModal id="updateHabitacionModal" tabindex="-1" aria-labelledby="updateHabitacionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -132,10 +145,10 @@
           <div class="col-12">
             <label for="toggleDisponible" class="form-label">Disponible</label>
             <input type="checkbox" [(ngModel)]="newHabitacion.disponible" id="toggleDisponible" name="disponible">
-          </div>            
+          </div>
           <div class="col-12">
             <label for="txtFechaUltimaMantenimiento" class="form-label">Teléfono</label>
-            <input type="datetime" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
+            <input type="date" class="form-control" id="txtFechaUltimaMantenimiento" name="fechaUltimaMantenimiento" required [(ngModel)]="newHabitacion.fechaUltimaMantenimiento">
           </div>
           <div class="col-12">
             <label for="txtNumeroHabitaciones" class="form-label">Número de habitación</label>
@@ -146,15 +159,24 @@
             <input type="text" class="form-control" id="txtPrecioNoche" name="precioNoche" required [(ngModel)]="newHabitacion.precioNoche">
           </div>
           <div class="col-12">
-            <label for="txtTipo" class="form-label">Tipo</label>
-            <input type="text" class="form-control" id="txtTipo" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+            <label for="cmbTipos" class="form-label">Tipo de Habitación</label>
+            <select class="form-select" id="cmbTipos" name="tipo" required [(ngModel)]="newHabitacion.tipo">
+                <option value="individual">Individual</option>
+                <option value="doble">Doble</option>
+                <option value="suite">Suite</option>
+            </select>
+        </div>
+          <div class="col-12">
+            <label for="txtFileid" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="txtFileid" accept=".jpg, .jpeg"  name="File" #fileInputFromUpdate>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="updateHabitacion()" data-bs-dismiss="modal">Actualizar</button>
-      </div>
+        <button type="button"  class="btn btn-primary" (click)="updateHabitacion()">Actualizar Habitación</button>
+         </div>
     </div>
   </div>
 </div>
+

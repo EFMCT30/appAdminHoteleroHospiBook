@@ -1,34 +1,77 @@
-<div class="card">
+<div class="card" style="margin-bottom: 20px;">
     <h5 class="card-header">Contactos de Emergencia</h5>
     <div class="card-body">
         <!-- Formulario de contacto de emergencia -->
-        <form class="row g-3">
+        <div class="row g-3">
             <div class="col-md-4">
                 <label for="contactName" class="form-label">Nombre de Contacto</label>
-                <input type="text" class="form-control" id="contactName" required>
+                <input type="text" class="form-control" id="contactName" disabled required [(ngModel)]="profileDataEmergency.contactName">
             </div>
             <div class="col-md-4">
                 <label for="contactPhone" class="form-label">Teléfono de Contacto</label>
-                <input type="text" class="form-control" id="contactPhone" required>
+                <input type="text" class="form-control" id="contactPhone" disabled required [(ngModel)]="profileDataEmergency.contactPhone">
             </div>
             <div class="col-md-4">
                 <label for="contactEmail" class="form-label">Correo de Contacto</label>
-                <input type="email" class="form-control" id="contactEmail" required>
+                <input type="email" class="form-control" id="contactEmail" disabled required [(ngModel)]="profileDataEmergency.contactEmail">
             </div>
             <div class="col-md-4">
                 <label for="relationship" class="form-label">Relación</label>
-                <input type="text" class="form-control" id="relationship" required>
+                <input type="text" class="form-control" id="relationship" disabled required [(ngModel)]="profileDataEmergency.relationship">
             </div>
             <div class="col-md-4">
                 <label for="address" class="form-label">Dirección de Contacto</label>
-                <input type="text" class="form-control" id="address" required>
+                <input type="text" class="form-control" id="address" disabled required [(ngModel)]="profileDataEmergency.address">
             </div>
+         <form class="row g-3">
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Guardar Contacto</button>
+                <button type="button"  class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#crearModal">
+                  Actualizar Contacto
+                </button>
             </div>
-        </form>
+         </form>
+        </div>
     </div>
 </div>
+
+<div class="modal fade" #exampleModal id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="crearModalLabel">Contacto de Emergencia</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3">
+            <div class="col-12">
+              <label for="txtCapacidad" class="form-label">Nombre de Contacto</label>
+              <input type="text" class="form-control" id="txtnomcontact" name="nombre" required [(ngModel)]="profileDataEmergency.contactName">
+            </div>
+            <div class="col-12">
+              <label for="txttelcontact" class="form-label">Teléfono de Contacto</label>
+              <input type="text" class="form-control" id="txttelcontact" name="telefono" required [(ngModel)]="profileDataEmergency.contactPhone">
+            </div>            
+            <div class="col-12">
+              <label for="txtemail" class="form-label">Correo de Contacto</label>
+              <input type="email" class="form-control" id="txtemail" name="txtemail" required [(ngModel)]="profileDataEmergency.contactEmail">
+            </div>
+            <div class="col-12">
+              <label for="txtrela" class="form-label">Relación</label>
+              <input type="text" class="form-control" id="txtrela" name="txtrela" required [(ngModel)]="profileDataEmergency.relationship">
+            </div>
+            <div class="col-12">
+              <label for="txtdirec" class="form-label">Dirección de Contacto</label>
+              <input type="text" class="form-control" id="txtdirec" name="txtdirec" required [(ngModel)]="profileDataEmergency.address">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="updateEmergency()" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

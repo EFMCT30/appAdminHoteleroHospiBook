@@ -1,56 +1,47 @@
+
 <div class="card">
     <h5 class="card-header">Perfil de Usuario</h5>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
-                <!-- Cuadro de imagen de perfil -->
-                <label for="profilePicture" class="form-label">Foto de perfil</label>
-                <div class="d-flex flex-column align-items-center">
-                    <img id="profilePicturePreview" src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=" alt="Foto de perfil" class="rounded-circle me-3" width="150px" height="150px">
-                    <input type="file" class="form-control" id="profilePicture" accept="image/*">
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col-12">
                 <!-- Formulario de perfil -->
                 <form class="row g-3">
                     <div class="col-md-4">
-                        <label for="validationDefaultId" class="form-label ">ID</label>
-                        <input type="text" class="form-control " id="validationDefaultId" aria-describedby="inputGroupPrepend2"  disabled required>
+                        <label for="txtId" class="form-label ">ID</label>
+                        <input type="text" class="form-control " id="txtId" name="id" aria-describedby="inputGroupPrepend2"  disabled required [(ngModel)]="profileData.clienteId">
                     </div>
                     <div class="col-md-4">
-                        <label for="validationDefaultName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="validationDefaultName" aria-describedby="inputGroupPrepend2" required>
+                        <label for="txtNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtNombre" name="nombre" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.nombre">
                     </div>
                     <div class="col-md-4">
-                        <label for="validationDefaultCorreo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="validationDefaultCorreo" aria-describedby="inputGroupPrepend2" required>
+                        <label for="txtTelefono" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="txtTelefono" name="telefono" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.telefono">
                     </div>
                     <div class="col-md-4">
-                        <label for="validationDefaultTelefono" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="validationDefaultTelefono" aria-describedby="inputGroupPrepend2" required>
+                        <label for="txtDireccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="txtDireccion" name="direccion" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.direccion">
                     </div>
                     <div class="col-md-4">
-                        <label for="validationDefaultDireccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="validationDefaultDireccion" aria-describedby="inputGroupPrepend2" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="validationDefaultFechaRegistro" class="form-label">Fecha de Registro</label>
-                        <input type="date" class="form-control" id="validationDefaultFechaRegistro" aria-describedby="inputGroupPrepend2" required>
+                        <label for="txtFecRegistro" class="form-label">Fecha de Registro</label>
+                        <input type="text" class="form-control" id="txtFecRegistro" name="fecregistro" aria-describedby="inputGroupPrepend2" disabled required [(ngModel)]="profileData.fechaRegistro">
                     </div>
                     <div class="col-md-8">
-                        <label for="validationDefaultPreferencias" class="form-label">Preferencias</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="validationDefaultPreferencias" style="height: 100px"></textarea>
+                        <label for="txtPreferencias" class="form-label">Preferencias</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="txtPreferencias" name="preferecnias" style="height: 100px" disabled [(ngModel)]="profileData.preferencias"></textarea>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" disabled [(ngModel)]="profileData.activo" name="activo">
                                 <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
+                      <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#updateprofileDataModal">
+                        Editar Perfil
+                      </button>
                     </div>
                 </form>
             </div>
@@ -59,6 +50,59 @@
 </div>
 
 <br>
+
+
 <app-contactoemergencia></app-contactoemergencia>
+
+
+<!-- Modal Actualizar Perfil -->
+<div class="modal fade" id="updateprofileDataModal" tabindex="-1" aria-labelledby="updateprofileDataModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateprofileDataModalLabel">Editar Perfil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <!-- Agrega los campos del perfil aquí -->
+          <div class="col-12">
+            <label for="updateTxtNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="updateTxtNombre" name="nombre" required [(ngModel)]="profileData.nombre">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtTelefono" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="updateTxtTelefono" name="telefono" required [(ngModel)]="profileData.telefono">
+          </div>
+          <div class="col-12">
+            <label for="updateTxtDireccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="updateTxtDireccion" name="direccion" required [(ngModel)]="profileData.direccion">
+          </div>
+          <!--<div class="col-12">
+            <label for="updateTxtFecRegistro" class="form-label">Fecha de Registro</label>
+            <input type="text" class="form-control" id="updateTxtFecRegistro" name="fecregistro" required [(ngModel)]="profileData.fechaRegistro">
+          </div>-->
+          <div class="col-12">
+            <label for="updateTxtPreferencias" class="form-label">Preferencias</label>
+            <textarea class="form-control" placeholder="Este campo es opcional." id="updateTxtPreferencias" name="preferecnias" style="height: 100px" [(ngModel)]="profileData.preferencias"></textarea>
+          </div>
+          <div class="col-12">
+            <div class="input-group">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="updateFlexSwitchCheckChecked" [(ngModel)]="profileData.activo" name="activo">
+                <label class="form-check-label" for="updateFlexSwitchCheckChecked">Activo</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="updateClient()" data-bs-dismiss="modal">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
