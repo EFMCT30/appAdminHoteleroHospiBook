@@ -1,53 +1,22 @@
-<!--================ Accomodation Area  =================-->
-<br>
+<!-- cuartos.component.html -->
+
 <section class="accomodation_area section_gap">
   <div class="container">
     <div class="section_title text-center">
-      <h2 class="title_color">Selccion de Cuartos</h2>
-      <p>Todos vivimos en una era que pertenece a los jóvenes de corazón. La vida se está volviendo extremadamente rápida. </p>
+      <h2 class="title_color">Selección de Cuartos</h2>
+      <p>Todos vivimos en una era que pertenece a los jóvenes de corazón. La vida se está volviendo extremadamente rápida.</p>
     </div>
     <div class="row mb_30">
-      <div class="col-lg-3 col-sm-6">
+      <div *ngFor="let habitacion of habitaciones" class="col-lg-3 col-sm-6">
         <div class="accomodation_item text-center">
           <div class="hotel_img">
-            <img src="/assets/room1.jpg" alt="">
+            <img src="/assets/room1.jpg" alt="{{ habitacion.tipo }}">
             <a href="#" class="btn theme_btn button_hover">Reserva</a>
           </div>
-          <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-          <h5>$250<small>/night</small></h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="accomodation_item text-center">
-          <div class="hotel_img">
-            <img src="/assets/room2.jpg" alt="">
-            <a href="#" class="btn theme_btn button_hover">Reserva</a>
-          </div>
-          <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-          <h5>$200<small>/night</small></h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="accomodation_item text-center">
-          <div class="hotel_img">
-            <img src="/assets/room3.jpg" alt="">
-            <a href="#" class="btn theme_btn button_hover">Reserva</a>
-          </div>
-          <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-          <h5>$750<small>/night</small></h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="accomodation_item text-center">
-          <div class="hotel_img">
-            <img src="/assets/room4.jpg" alt="">
-            <a href="#" class="btn theme_btn button_hover">Reserva</a>
-          </div>
-          <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-          <h5>$200<small>/night</small></h5>
+          <a href="#"><h4 class="sec_h4">{{ habitacion.tipo }}</h4></a>
+          <h5>{{ habitacion.precioNoche | currency:'USD':'symbol':'1.2-2' }}<small>/night</small></h5>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!--================ Accomodation Area  =================-->
