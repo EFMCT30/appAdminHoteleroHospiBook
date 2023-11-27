@@ -21,9 +21,59 @@ export class BannerComponent {
     private axiosReservaService: ReservaService,
     private tokenService: TokenService
   ) {}
-
+  
+  getFormattedCurrentDate(): string {
+    const currentDate = new Date();
+    return currentDate.toISOString().slice(0, 16);
+  }
+  
   createReserva() {
-    // Verificar que tengas un token válido
+   
+    const camposVacios: string[] = [];
+    const camposInvalidos: string[] = [];
+    
+    if (!this.reservaData.fechaInicio || this.reservaData.fechaInicio instanceof Date && isNaN(this.reservaData.fechaInicio.getTime())) {
+      camposVacios.push('Fecha Inicio no válida');
+      // Aquí puedes mostrar un mensaje de error, lanzar una excepción o realizar otra acción apropiada
+  }
+
+  // Validación para fechaFin
+  if (!this.reservaData.fechaFin || this.reservaData.fechaFin instanceof Date && isNaN(this.reservaData.fechaFin.getTime())) {
+      camposVacios.push('Fecha Fin no válida');
+      // Aquí puedes mostrar un mensaje de error, lanzar una excepción o realizar otra acción apropiada
+  }
+
+    if (!this.reservaData.idhabitacion) {
+      camposVacios.push('Habitacion');
+    }
+    if (!this.reservaData.precioTotal) {
+      camposVacios.push('Precio');
+    }
+    if (!this.reservaData.comentarios) {
+      camposVacios.push('Comentarios');
+    } else if (!/^.{20,50}$/.test(this.reservaData.comentarios)) {
+      camposInvalidos.push('Comentarios (debe tener entre 20 y 50 caracteres.)');
+    }
+    
+
+    if (camposVacios.length > 0 || camposInvalidos.length > 0) {
+      let mensajeError = '';
+      if (camposVacios.length > 0) {
+        mensajeError += `Los siguientes campos son obligatorios y deben completarse: ${camposVacios.join(', ')}. `;
+      }
+      if (camposInvalidos.length > 0) {
+        mensajeError += `Los siguientes campos tienen formato inválido: ${camposInvalidos.join(', ')}.`;
+      }
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos inválidos u obligatorios',
+        text: mensajeError,
+      });
+
+      return;
+    }
+
     const token = this.tokenService.getToken();
     if (!token) {
       console.log('No hay un token válido.');

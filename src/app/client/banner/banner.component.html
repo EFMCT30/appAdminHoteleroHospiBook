@@ -111,7 +111,12 @@
           </div>
           <div class="mb-3">
             <label for="fechaCreacion" class="form-label">Fecha de Creación</label>
-            <input type="date" class="form-control" id="fechaCreacion" name="fechaCreacion" [(ngModel)]="reservaData.fechaCreacion">
+            <input 
+            type="datetime-local" 
+            class="form-control" 
+            id="fechaCreacion" 
+            name="fechaCreacion" 
+            [ngModel]="getFormattedCurrentDate()" disabled>
           </div>
           <div class="mb-3">
             <label for="comentarios" class="form-label">Comentarios</label>
