@@ -81,6 +81,7 @@ export class ProfileComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
+          console.log(this.profileData);
         },
         (error) => {
           console.error('Error al actualizar el cliente:', error);
