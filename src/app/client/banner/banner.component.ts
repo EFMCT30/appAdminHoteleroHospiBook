@@ -21,7 +21,7 @@ export class BannerComponent {
     private axiosReservaService: ReservaService,
     private tokenService: TokenService
   ) {}
-
+  
   getFormattedCurrentDate(): string {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
