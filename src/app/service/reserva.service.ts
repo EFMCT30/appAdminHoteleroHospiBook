@@ -11,6 +11,24 @@ export class ReservaService {
 
   constructor() { }
 
+  public getReservas(token: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios
+        .get(`${this.ruta}/reservas/listar`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
   createReserva(token: string, reservaDTO: any): Observable<any> {
     return new Observable<any>((observer) => {
       axios
