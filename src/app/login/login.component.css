@@ -1,0 +1,20 @@
+.background-overlay {
+    background-image: url('https://e.rpp-noticias.io/xlarge/2018/12/31/145514_733004.png');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Opacidad del fondo */
+    background-color: rgba(0, 0, 0, 0.7); /* Opacidad al 70% */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    z-index: 10; /* Asegura que esté en el frente de otros elementos */
+    opacity: 90%;
+  }
+  
+  .container {
+    /* Opacidad del formulario */
+    position: relative; /* Asegura que el z-index funcione */
+    z-index: 1000;
+  }
+  
