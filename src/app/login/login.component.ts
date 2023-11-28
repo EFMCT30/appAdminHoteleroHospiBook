@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { TokenService } from '../service/token.service'; // Import the TokenService
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,17 @@ export class LoginComponent {
   constructor(private router: Router, private tokenService: TokenService) {}
 
   login() {
+
+    if (!this.username || !this.password) {
+      // Check for empty fields
+      Swal.fire({
+        icon: 'error',
+        title: 'Acceso denegado',
+        text: 'Por favor, ingresa tanto el nombre de usuario como la contraseña.',
+      });
+      return; // Exit the function if fields are empty
+    }
+
     const loginUrl = 'http://localhost:8081/login';
     const data = {
       username: this.username,
