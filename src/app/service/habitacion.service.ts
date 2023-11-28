@@ -29,6 +29,23 @@ export class HabitacionService {
     });
   }
 
+  obtenerHabitacionPorId(id: number, token: string): Observable<any> {
+    return new Observable<any>((observer) => {
+      axios.get(`${this.ruta}/habitaciones/xporid/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error) => {
+        observer.error(error);
+      });
+    });
+  }
+
   
   public addHabitacion(token: string, newHabitacionData: any): Observable<any> {
     return new Observable<any>((observer) => {

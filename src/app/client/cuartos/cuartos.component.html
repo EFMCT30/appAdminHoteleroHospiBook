@@ -11,7 +11,10 @@
         <div class="accomodation_item text-center">
           <div class="hotel_img">
             <img src='{{"http://localhost:8081/"+habitacion.imageUrl}}' alt="{{ habitacion.tipo }}"  style="width: 320px; height: 320px;">
-            <a href="#" class="btn theme_btn button_hover">Reserva</a>
+            <button type="button" class="btn theme_btn button_hover" data-bs-toggle="modal" data-bs-target="#detalleModal"
+        (click)="mostrarDetallesHabitacion(habitacion)">
+        Detalle
+      </button> 
           </div>
           <a href="#"><h4 class="sec_h4">{{ habitacion.tipo }}</h4></a>
           <h5>{{ habitacion.precioNoche | currency:'USD':'symbol':'1.2-2' }}<small>/night</small></h5>
@@ -20,3 +23,29 @@
     </div>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles de la habitación</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Mostrar detalles de la habitación seleccionada -->
+        <div *ngIf="habitacionSeleccionada">
+          <p>Habitación ID: {{ habitacionSeleccionada.habitacionId }}</p>
+          <p>Capacidad: {{ habitacionSeleccionada.capacidad }}</p>
+          <p>Disponible: {{ habitacionSeleccionada.disponible ? 'Sí' : 'No' }}</p>
+          <p>Precio por noche: {{ habitacionSeleccionada.precioNoche | currency:'USD':'symbol':'1.2-2' }}</p>
+          <p>Tipo de habitación: {{ habitacionSeleccionada.tipo }}</p>
+          <p><img style="width: 350px; height: 200px;" src='{{"http://localhost:8081/"+habitacionSeleccionada.imageUrl}}'></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

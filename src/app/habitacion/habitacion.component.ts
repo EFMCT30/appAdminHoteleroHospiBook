@@ -12,6 +12,7 @@ import { Habitacion } from 'src/Entity/Habitacion';
 })
 export class HabitacionComponent implements OnInit {
   hotelesDisponibles: any[] = [];
+  idHabitacion: number = 1;
   habitaciones: Habitacion[] = [];
   token: string | null = null;
   newHabitacion: Habitacion = new Habitacion(
@@ -58,6 +59,7 @@ export class HabitacionComponent implements OnInit {
   }
   }
 
+ 
   listarHabitaciones() {
     this.token = this.tokenService.getToken();
 
